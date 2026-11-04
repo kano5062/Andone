@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>保険代理店サイト 試作</title>
+<title>And ONE株式会社</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Jost:wght@400;500&display=swap">
 <style>
-/* Layout: 落ち着いた藍色の帯と白地を交互に置き、見出しは「英字ラベル＋明朝の日本語」。CTAは朝日色の一点だけ。 */
+/* Layout: ロゴの地球の青緑を深くした帯と白地を交互に置き、見出しは「英字ラベル＋明朝の日本語」。CTAはロゴの「1」の赤だけ。 */
 :root{
-  --bg:#F7F8F6; --surface:#FFFFFF; --ink:#18263A; --muted:#5B6878; --line:#DCE1E4;
-  --indigo:#1E3A5F; --indigo-ink:#F3F6F8; --sky:#E4ECF2; --sun:#D9792B; --sun-ink:#FFFFFF;
+  --bg:#F7F8F7; --surface:#FFFFFF; --ink:#141B1D; --muted:#56666A; --line:#DCE3E3;
+  --indigo:#123B42; --indigo-ink:#F1F7F7; --sky:#E2F1F1; --sun:#D3222B; --sun-ink:#FFFFFF;
   --f-display:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
   --f-body:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
   --f-label:"Jost","Helvetica Neue",Arial,sans-serif;
@@ -20,11 +20,11 @@
   --gutter-r:max(16px, env(safe-area-inset-right, 0px));
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0F1722; --surface:#16212F; --ink:#E6EBF0; --muted:#9AA7B6; --line:#2A3746;
-  --indigo:#1A2D45; --indigo-ink:#E6EBF0; --sky:#1B2A3B; --sun:#E8914A; --sun-ink:#1A1208; color-scheme:dark}}
+  --bg:#0D1517; --surface:#142023; --ink:#E5EDED; --muted:#98AAAD; --line:#27373A;
+  --indigo:#163238; --indigo-ink:#E5EDED; --sky:#18292C; --sun:#F0545B; --sun-ink:#1A0A0B; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0F1722; --surface:#16212F; --ink:#E6EBF0; --muted:#9AA7B6; --line:#2A3746;
-  --indigo:#1A2D45; --indigo-ink:#E6EBF0; --sky:#1B2A3B; --sun:#E8914A; --sun-ink:#1A1208; color-scheme:dark}
+  --bg:#0D1517; --surface:#142023; --ink:#E5EDED; --muted:#98AAAD; --line:#27373A;
+  --indigo:#163238; --indigo-ink:#E5EDED; --sky:#18292C; --sun:#F0545B; --sun-ink:#1A0A0B; color-scheme:dark}
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -50,6 +50,7 @@ p{margin:0}
 .site-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .site-header .wrap{display:flex;align-items:center;gap:24px;min-height:72px}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--f-display);font-weight:700;font-size:1.2rem;letter-spacing:.06em;white-space:nowrap}
+.logo img{width:44px;height:44px;border-radius:50%;flex:none;display:block}
 .logo small{display:block;font-family:var(--f-label);font-size:.62rem;letter-spacing:.24em;color:var(--muted);font-weight:500;line-height:1}
 .nav{margin-left:auto;display:flex;align-items:center;gap:22px}
 .nav a{text-decoration:none;font-size:.88rem;font-weight:500}
@@ -83,7 +84,7 @@ p{margin:0}
 .hero p.lead{font-size:1.02rem}
 .hero .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:2em}
 .hero-art{max-width:100%;aspect-ratio:1;position:relative}
-.hero-art svg{width:100%;height:100%;display:block}
+.hero-art img{width:100%;height:100%;display:block;border-radius:50%;box-shadow:0 24px 60px -24px color-mix(in srgb,var(--indigo) 55%,transparent)}
 .slides{display:flex;gap:8px;margin-top:2.4em}
 .slides button{width:36px;height:4px;border:0;border-radius:2px;background:var(--line);cursor:pointer;padding:0}
 .slides button[aria-current="true"]{background:var(--sun)}
@@ -169,6 +170,20 @@ a.pitem:hover h3{color:var(--sun)}
 @media (max-width:640px){.news li{grid-template-columns:auto 1fr;gap:6px 12px}.news a{grid-column:1/-1}}
 .split{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}
 
+/* company table */
+.company{display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(32px,5vw,64px);align-items:start}
+.ctable{display:grid;grid-template-columns:9em 1fr;margin:0;border-top:1px solid var(--line)}
+.ctable > *{padding:16px 0;border-bottom:1px solid var(--line);min-width:0}
+.ctable dt{font-weight:700;font-size:.9rem}
+.ctable dd{margin:0}
+.ctable ol{margin:0;padding-left:1.4em}
+.offices{display:grid;gap:16px}
+.offices article{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:24px}
+.offices h3{font-family:var(--f-display);font-size:1.15rem;margin:.2em 0 .4em}
+.offices p{color:var(--muted);font-size:.92rem}
+@media (max-width:860px){.company{grid-template-columns:1fr}}
+@media (max-width:480px){.ctable{grid-template-columns:1fr}.ctable dt{padding-bottom:0;border-bottom:0}}
+
 /* company / recruit cards */
 .duo{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .duo a{display:block;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:28px;transition:border-color .2s}
@@ -207,8 +222,8 @@ footer{background:var(--surface);border-top:1px solid var(--line);font-size:.86r
 <header class="site-header">
   <div class="wrap" style="position:relative">
     <a class="logo" href="#top" aria-label="トップへ">
-      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="none" stroke="var(--indigo)" stroke-width="2"/><path d="M5 21 A12 12 0 0 1 29 21" fill="none" stroke="var(--sun)" stroke-width="3" stroke-linecap="round"/><circle cx="17" cy="21" r="2.6" fill="var(--sun)"/></svg>
-      <span><span class="ph">〇〇保険株式会社</span><small>INSURANCE PARTNERS</small></span>
+      <img src="assets/logo.jpg" alt="" width="44" height="44">
+      <span>And ONE株式会社<small>AND ONE INCORPORATED</small></span>
     </a>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">MENU</button>
     <nav class="nav" id="nav" aria-label="メインメニュー">
@@ -241,19 +256,8 @@ footer{background:var(--surface);border-top:1px solid var(--line);font-size:.86r
           <button role="tab" aria-current="false" aria-label="社会への貢献メッセージ" data-i="2"></button>
         </div>
       </div>
-      <div class="hero-art" aria-hidden="true">
-        <svg viewBox="0 0 400 400">
-          <circle cx="200" cy="200" r="186" fill="var(--surface)" stroke="var(--line)"/>
-          <circle cx="200" cy="200" r="140" fill="none" stroke="var(--line)" stroke-dasharray="2 6"/>
-          <path d="M60 250 A140 140 0 0 1 340 250 Z" fill="var(--indigo)"/>
-          <path d="M100 250 A100 100 0 0 1 300 250" fill="none" stroke="var(--sun)" stroke-width="6" stroke-linecap="round"/>
-          <circle cx="200" cy="250" r="22" fill="var(--sun)"/>
-          <line x1="40" y1="250" x2="360" y2="250" stroke="var(--ink)" stroke-width="1.5"/>
-          <g fill="var(--muted)" font-family="Jost, sans-serif" font-size="11" letter-spacing="3">
-            <text x="200" y="290" text-anchor="middle">LIFE · NON-LIFE · CORPORATE</text>
-            <text x="200" y="312" text-anchor="middle">PLANNING</text>
-          </g>
-        </svg>
+      <div class="hero-art">
+        <img src="assets/logo.jpg" alt="And ONE株式会社のロゴ" width="480" height="480">
       </div>
     </div>
   </section>
@@ -262,8 +266,8 @@ footer{background:var(--surface);border-top:1px solid var(--line);font-size:.86r
   <section class="band">
     <div class="wrap">
       <dl class="figures">
-        <div class="figure"><dt>保有契約件数</dt><dd class="ph">00,000<span>件</span></dd><p class="muted">（20XX年XX月末時点）</p></div>
-        <div class="figure"><dt>契約継続率</dt><dd class="ph">00.0<span>%</span></dd><p class="muted">（20XX年度）</p></div>
+        <div class="figure"><dt>設立</dt><dd>2026<span>年10月</span></dd><p class="muted">愛知県海部郡大治町に本店を設立</p></div>
+        <div class="figure"><dt>拠点</dt><dd>2<span>拠点</span></dd><p class="muted">愛知本店・北九州支店</p></div>
         <div class="figure"><dt>取扱保険会社</dt><dd class="ph">00<span>社</span></dd><p class="muted">生命保険・損害保険の合計</p></div>
       </dl>
     </div>
@@ -290,7 +294,7 @@ footer{background:var(--surface);border-top:1px solid var(--line);font-size:.86r
       <div class="head">
         <p class="eyebrow">Service</p>
         <h2 class="h2">個人にも、法人にも。<br>それぞれに合った保障を設計します。</h2>
-        <p class="lead">ファイナンシャルプランナーがご家族の状況や事業の計画をうかがい、生命保険・損害保険を組み合わせて、ひとつのプランにまとめます。</p>
+        <p class="lead">ファイナンシャルプランナーがご家族の状況や事業の計画をうかがい、生命保険・損害保険を組み合わせて、ひとつのプランにまとめます。法人のお客様には、経営コンサルティングもあわせてご提供します。</p>
       </div>
       <div class="services">
         <a class="service" href="#products">
@@ -311,7 +315,7 @@ footer{background:var(--surface);border-top:1px solid var(--line);font-size:.86r
           </div>
           <div class="body">
             <h3>法人のお客様</h3>
-            <p>事業承継、役員退職金の準備、福利厚生、事業リスクへの備えなど、経営の安定を保険の面から支えます。</p>
+            <p>事業承継、役員退職金の準備、福利厚生、事業リスクへの備えに加え、経営コンサルティングで企業の安定した成長を支えます。</p>
             <span class="more">VIEW MORE →</span>
           </div>
         </a>
@@ -431,24 +435,48 @@ footer{background:var(--surface);border-top:1px solid var(--line);font-size:.86r
         <a class="more" href="#top">一覧を見る →</a>
       </div>
       <ul class="news">
-        <li><time datetime="2026-11-01">2026.11.01</time><span class="cat">お知らせ</span><a href="#top">ホームページを開設しました</a></li>
-        <li><time datetime="2026-10-15">2026.10.15</time><span class="cat">店舗</span><a href="#top"><span class="ph">〇〇支店</span>を開設しました</a></li>
-        <li><time datetime="2026-10-01">2026.10.01</time><span class="cat">プレス</span><a href="#top"><span class="ph">〇〇保険株式会社</span>を設立しました</a></li>
+        <li><time datetime="2026-11-04">2026.11.04</time><span class="cat">お知らせ</span><a href="#top">ホームページを開設しました</a></li>
+        <li><time datetime="2026-10-13">2026.10.13</time><span class="cat">拠点</span><a href="#company">北九州支店（福岡県北九州市小倉北区）を開設しました</a></li>
+        <li><time datetime="2026-10-01">2026.10.01</time><span class="cat">お知らせ</span><a href="#company">And ONE株式会社を設立しました</a></li>
       </ul>
     </div>
   </section>
 
-  <!-- COMPANY / OFFICE / RECRUIT -->
+  <!-- COMPANY -->
   <section class="section" id="company">
     <div class="wrap">
       <div class="head">
-        <p class="eyebrow">About us</p>
-        <h2 class="h2">会社を知る</h2>
+        <p class="eyebrow">Company</p>
+        <h2 class="h2">会社概要</h2>
       </div>
-      <div class="duo">
-        <a href="#top"><p class="eyebrow">Company</p><h3>会社概要</h3><p>代表メッセージ、会社概要、沿革をご紹介します。</p></a>
-        <a href="#top"><p class="eyebrow">Office</p><h3>支店一覧</h3><p>お近くの店舗で、対面でのご相談を承ります。</p></a>
-        <a href="#top"><p class="eyebrow">Recruit</p><h3>採用情報</h3><p>お客様の人生に寄り添う仕事を、一緒にしませんか。</p></a>
+      <div class="company">
+        <dl class="ctable">
+          <dt>商号</dt><dd>And ONE株式会社<br><span class="note">And ONE Incorporated</span></dd>
+          <dt>設立</dt><dd>2026年（令和8年）10月1日</dd>
+          <dt>資本金</dt><dd>200万円</dd>
+          <dt>代表取締役</dt><dd>加納 剛朗<br>有吉 公一郎</dd>
+          <dt>本店所在地</dt><dd>愛知県海部郡大治町大字砂子字中割2304番地</dd>
+          <dt>支店</dt><dd>福岡県北九州市小倉北区浅野二丁目14番1号</dd>
+          <dt>事業内容</dt><dd><ol><li>損害保険代理業</li><li>生命保険の募集に関する業務</li><li>ファイナンシャルプランニング業務</li><li>経営コンサルタント業務</li><li>金融商品仲介業</li></ol></dd>
+          <dt>法人番号</dt><dd><span class="ph">0000000000000</span></dd>
+        </dl>
+        <div class="offices">
+          <article>
+            <p class="eyebrow">Head Office</p>
+            <h3>本店（愛知）</h3>
+            <p>〒<span class="ph">000-0000</span><br>愛知県海部郡大治町大字砂子字中割2304番地<br>TEL <span class="ph">000-000-0000</span></p>
+          </article>
+          <article>
+            <p class="eyebrow">Kitakyushu Branch</p>
+            <h3>北九州支店（福岡）</h3>
+            <p>〒<span class="ph">000-0000</span><br>福岡県北九州市小倉北区浅野二丁目14番1号<br>TEL <span class="ph">000-000-0000</span></p>
+          </article>
+          <article>
+            <p class="eyebrow">Recruit</p>
+            <h3>採用情報</h3>
+            <p>お客様の人生に寄り添う仕事を、一緒にしませんか。<span class="ph">募集要項は準備中です。</span></p>
+          </article>
+        </div>
       </div>
     </div>
   </section>
@@ -487,16 +515,16 @@ footer{background:var(--surface);border-top:1px solid var(--line);font-size:.86r
   <div class="wrap">
     <div class="fgrid">
       <div>
-        <a class="logo" href="#top"><span class="ph">〇〇保険株式会社</span></a>
-        <p class="muted" style="margin-top:12px;color:var(--muted)">〒<span class="ph">000-0000</span><br><span class="ph">東京都〇〇区〇〇 0-0-0</span><br>TEL <span class="ph">00-0000-0000</span></p>
+        <a class="logo" href="#top"><img src="assets/logo.jpg" alt="" width="44" height="44"><span>And ONE株式会社</span></a>
+        <p class="muted" style="margin-top:12px;color:var(--muted)">〒<span class="ph">000-0000</span><br>愛知県海部郡大治町大字砂子字中割2304番地<br>TEL <span class="ph">00-0000-0000</span></p>
       </div>
       <div><h4>Service</h4><ul><li><a href="#service">個人のお客様</a></li><li><a href="#service">法人のお客様</a></li><li><a href="#products">取扱商品</a></li></ul></div>
-      <div><h4>Company</h4><ul><li><a href="#company">会社概要</a></li><li><a href="#company">支店一覧</a></li><li><a href="#company">採用情報</a></li><li><a href="#top">お知らせ</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#company">会社概要</a></li><li><a href="#company">拠点一覧</a></li><li><a href="#company">採用情報</a></li><li><a href="#top">お知らせ</a></li></ul></div>
       <div><h4>Policy</h4><ul><li><a href="#promise">お客様本位の業務運営方針</a></li><li><a href="#top">プライバシーポリシー</a></li><li><a href="#top">勧誘方針</a></li><li><a href="#top">保険募集指針</a></li><li><a href="#top">反社会的勢力排除に関する基本方針</a></li></ul></div>
     </div>
     <div class="complaint">
       <span>苦情・ご相談窓口　<span class="ph">0120-000-000</span>（平日 9:00〜17:00）</span>
-      <span>© 2026 <span class="ph">〇〇 Insurance Inc.</span> All Rights Reserved.</span>
+      <span>© 2026 And ONE Inc. All Rights Reserved.</span>
     </div>
   </div>
 </footer>
