@@ -41,6 +41,8 @@ p{margin:0}
 .band .lead,.band .muted{color:color-mix(in srgb,var(--indigo-ink) 78%,transparent)}
 .tint{background:var(--sky)}
 
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
 /* placeholder marker */
 .ph{background:color-mix(in srgb,var(--sun) 16%,transparent);border-bottom:1px dashed var(--sun);padding:0 .2em}
 
@@ -96,6 +98,17 @@ p{margin:0}
 .figure dd span{font-family:var(--f-body);font-size:.95rem;margin-left:.2em}
 .figure .muted{font-size:.75rem}
 @media (max-width:640px){.figures{grid-template-columns:1fr}.figure{border-right:0;border-bottom:1px solid color-mix(in srgb,var(--indigo-ink) 20%,transparent)}}
+
+/* travel banner */
+.travel{display:grid;grid-template-columns:auto 1fr auto;gap:24px 32px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:28px clamp(20px,4vw,40px)}
+.travel svg{width:64px;height:64px;display:block}
+.travel h2{font-family:var(--f-display);font-size:clamp(1.25rem,2.6vw,1.6rem);line-height:1.5;margin-top:.2em}
+.travel p.desc{color:var(--muted);font-size:.92rem;margin-top:.4em}
+.travel .btn{white-space:nowrap}
+.ext{font-size:.85em}
+@media (max-width:760px){.travel{grid-template-columns:1fr}.travel .btn{justify-self:start}}
+a.pitem{display:block;text-decoration:none}
+a.pitem:hover h3{color:var(--sun)}
 
 /* service cards */
 .services{display:grid;grid-template-columns:1fr 1fr;gap:28px}
@@ -256,6 +269,21 @@ footer{background:var(--surface);border-top:1px solid var(--line);font-size:.86r
     </div>
   </section>
 
+  <!-- TRAVEL -->
+  <section class="section" id="travel" style="padding-bottom:0">
+    <div class="wrap">
+      <div class="travel">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="var(--sky)"/><path d="M14 36 L50 22 L46 30 L54 34 L50 36 L42 34 L34 44 L30 42 L34 32 L22 36 L18 42 L14 40 Z" fill="var(--indigo)"/><circle cx="48" cy="46" r="5" fill="var(--sun)"/></svg>
+        <div>
+          <p class="eyebrow">Travel Insurance</p>
+          <h2>海外旅行保険は、ネットで申し込めます</h2>
+          <p class="desc">ご出発の前に、スマートフォンやパソコンから手続きできます。チャブ保険のお申し込みサイトへ移動します。</p>
+        </div>
+        <a class="btn btn-sun" data-travel-link href="#travel" target="_blank" rel="noopener">海外旅行保険を申し込む <span class="ext" aria-hidden="true">↗</span><span class="sr-only">（新しいタブで開きます）</span></a>
+      </div>
+    </div>
+  </section>
+
   <!-- SERVICE -->
   <section class="section" id="service">
     <div class="wrap">
@@ -346,7 +374,7 @@ footer{background:var(--surface);border-top:1px solid var(--line);font-size:.86r
         <div class="pitem"><h3>地震保険</h3><p>地震・噴火・津波による損害に備えたい方へ</p></div>
         <div class="pitem"><h3>傷害保険</h3><p>日常生活のケガに備えたい方へ</p></div>
         <div class="pitem"><h3>個人賠償責任保険</h3><p>他人にケガをさせた場合などに備えたい方へ</p></div>
-        <div class="pitem"><h3>旅行保険</h3><p>国内・海外旅行中のトラブルに備えたい方へ</p></div>
+        <a class="pitem" data-travel-link href="#travel" target="_blank" rel="noopener"><h3>海外旅行保険 <span class="ext" aria-hidden="true">↗</span></h3><p>ネットで申し込めます。旅行中の病気やケガ、携行品の損害に備えたい方へ</p></a>
       </div>
       <div class="plist" id="p-corp" role="tabpanel" aria-labelledby="t-corp" hidden>
         <div class="pitem"><h3>事業保障</h3><p>経営者に万一があった場合の資金を確保したい企業へ</p></div>
@@ -474,7 +502,11 @@ footer{background:var(--surface);border-top:1px solid var(--line);font-size:.86r
 </footer>
 
 <script>
+// 海外旅行保険の申込先。リンク先が変わったらこの1行だけ書き換える
+var TRAVEL_INSURANCE_URL='https://www.chubbtravelinsurance.jp/?brokerCode=ailead';
 (function(){
+  document.querySelectorAll('[data-travel-link]').forEach(function(a){a.href=TRAVEL_INSURANCE_URL});
+
   var btn=document.getElementById('menuBtn'), nav=document.getElementById('nav');
   btn.addEventListener('click',function(){var o=nav.classList.toggle('open');btn.setAttribute('aria-expanded',o)});
   nav.addEventListener('click',function(e){if(e.target.closest('a')){nav.classList.remove('open');btn.setAttribute('aria-expanded','false')}});
