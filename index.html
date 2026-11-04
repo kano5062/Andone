@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>保険代理店サイト 試作</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Jost:wght@400;500&display=swap">
+<style>
+/* Layout: 落ち着いた藍色の帯と白地を交互に置き、見出しは「英字ラベル＋明朝の日本語」。CTAは朝日色の一点だけ。 */
+:root{
+  --bg:#F7F8F6; --surface:#FFFFFF; --ink:#18263A; --muted:#5B6878; --line:#DCE1E4;
+  --indigo:#1E3A5F; --indigo-ink:#F3F6F8; --sky:#E4ECF2; --sun:#D9792B; --sun-ink:#FFFFFF;
+  --f-display:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  --f-body:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  --f-label:"Jost","Helvetica Neue",Arial,sans-serif;
+  --gutter-l:max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r:max(16px, env(safe-area-inset-right, 0px));
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1722; --surface:#16212F; --ink:#E6EBF0; --muted:#9AA7B6; --line:#2A3746;
+  --indigo:#1A2D45; --indigo-ink:#E6EBF0; --sky:#1B2A3B; --sun:#E8914A; --sun-ink:#1A1208; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1722; --surface:#16212F; --ink:#E6EBF0; --muted:#9AA7B6; --line:#2A3746;
+  --indigo:#1A2D45; --indigo-ink:#E6EBF0; --sky:#1B2A3B; --sun:#E8914A; --sun-ink:#1A1208; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.85;letter-spacing:.02em}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+a{color:inherit}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--sun);outline-offset:3px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
+.section{padding-block:clamp(64px,9vw,112px)}
+.band{background:var(--indigo);color:var(--indigo-ink)}
+.band .lead,.band .muted{color:color-mix(in srgb,var(--indigo-ink) 78%,transparent)}
+.tint{background:var(--sky)}
+
+/* placeholder marker */
+.ph{background:color-mix(in srgb,var(--sun) 16%,transparent);border-bottom:1px dashed var(--sun);padding:0 .2em}
+
+/* header */
+.site-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.site-header .wrap{display:flex;align-items:center;gap:24px;min-height:72px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--f-display);font-weight:700;font-size:1.2rem;letter-spacing:.06em;white-space:nowrap}
+.logo small{display:block;font-family:var(--f-label);font-size:.62rem;letter-spacing:.24em;color:var(--muted);font-weight:500;line-height:1}
+.nav{margin-left:auto;display:flex;align-items:center;gap:22px}
+.nav a{text-decoration:none;font-size:.88rem;font-weight:500}
+.nav a:hover{color:var(--sun)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6em;padding:.8em 1.6em;border-radius:999px;font-weight:700;font-size:.92rem;text-decoration:none;border:1px solid transparent;cursor:pointer;font-family:var(--f-body);transition:transform .2s,background .2s}
+.btn-sun{background:var(--sun);color:var(--sun-ink)}
+.btn-sun:hover{transform:translateY(-2px)}
+.btn-line{border-color:currentColor;background:transparent;color:inherit}
+.btn-line:hover{background:color-mix(in srgb,currentColor 8%,transparent)}
+.menu-btn{display:none;margin-left:auto;background:none;border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-family:var(--f-label);letter-spacing:.16em;font-size:.75rem;color:var(--ink);cursor:pointer}
+@media (max-width:960px){
+  .menu-btn{display:block}
+  .nav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;gap:0;background:var(--surface);border-bottom:1px solid var(--line);padding:8px var(--gutter-r) 20px var(--gutter-l)}
+  .nav.open{display:flex}
+  .nav a{padding:14px 0;border-bottom:1px solid var(--line)}
+  .nav .btn{margin-top:16px;border-bottom:0}
+}
+
+/* heading pattern */
+.eyebrow{font-family:var(--f-label);font-size:.78rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sun);font-weight:500}
+.h2{font-family:var(--f-display);font-size:clamp(1.6rem,3.4vw,2.3rem);line-height:1.5;margin-top:.4em;font-weight:700}
+.lead{color:var(--muted);max-width:40em;margin-top:1.2em}
+.head{margin-bottom:clamp(36px,5vw,56px)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--surface),var(--sky))}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding-block:clamp(56px,8vw,104px)}
+.hero h1{font-family:var(--f-display);font-weight:700;font-size:clamp(2rem,5vw,3.4rem);line-height:1.45;letter-spacing:.06em}
+.hero h1 em{font-style:normal;color:var(--sun)}
+.hero .en{font-family:var(--f-label);letter-spacing:.3em;font-size:.8rem;color:var(--muted);text-transform:uppercase;margin-bottom:1.4em}
+.hero p.lead{font-size:1.02rem}
+.hero .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:2em}
+.hero-art{max-width:100%;aspect-ratio:1;position:relative}
+.hero-art svg{width:100%;height:100%;display:block}
+.slides{display:flex;gap:8px;margin-top:2.4em}
+.slides button{width:36px;height:4px;border:0;border-radius:2px;background:var(--line);cursor:pointer;padding:0}
+.slides button[aria-current="true"]{background:var(--sun)}
+@media (max-width:820px){.hero .wrap{grid-template-columns:1fr}.hero-art{max-width:340px;margin:0 auto;order:-1}}
+
+/* figures */
+.figures{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid color-mix(in srgb,var(--indigo-ink) 20%,transparent)}
+.figure{padding:28px 20px;border-right:1px solid color-mix(in srgb,var(--indigo-ink) 20%,transparent);min-width:0}
+.figure:last-child{border-right:0}
+.figure dt{font-size:.85rem}
+.figure dd{margin:.2em 0 0;font-family:var(--f-label);font-size:clamp(2rem,4.4vw,3rem);line-height:1.2;font-variant-numeric:tabular-nums}
+.figure dd span{font-family:var(--f-body);font-size:.95rem;margin-left:.2em}
+.figure .muted{font-size:.75rem}
+@media (max-width:640px){.figures{grid-template-columns:1fr}.figure{border-right:0;border-bottom:1px solid color-mix(in srgb,var(--indigo-ink) 20%,transparent)}}
+
+/* service cards */
+.services{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.service{background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;transition:transform .25s}
+.service:hover{transform:translateY(-4px)}
+.service .img{aspect-ratio:16/8;max-width:100%;display:grid;place-items:end start;padding:20px;background:var(--sky);position:relative}
+.service .img svg{position:absolute;inset:0;width:100%;height:100%}
+.service .img .tag{position:relative;font-family:var(--f-label);letter-spacing:.24em;font-size:.75rem;background:var(--surface);padding:.3em .9em;border-radius:3px}
+.service .body{padding:24px 26px 28px;display:grid;gap:10px}
+.service h3{font-family:var(--f-display);font-size:1.35rem}
+.service p{color:var(--muted);font-size:.94rem}
+.more{font-family:var(--f-label);letter-spacing:.18em;font-size:.78rem;color:var(--sun);font-weight:500}
+@media (max-width:760px){.services{grid-template-columns:1fr}}
+
+/* reasons */
+.reasons{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}
+.reason{padding:32px 28px 8px 0;min-width:0}
+.reason + .reason{padding-left:28px;border-left:1px solid var(--line)}
+.reason .num{font-family:var(--f-label);font-size:.78rem;letter-spacing:.2em;color:var(--sun)}
+.reason h3{font-family:var(--f-display);font-size:1.2rem;margin:.5em 0 .6em;line-height:1.6}
+.reason p{color:var(--muted);font-size:.94rem}
+@media (max-width:820px){.reasons{grid-template-columns:1fr}.reason,.reason + .reason{padding:28px 0;border-left:0;border-bottom:1px solid var(--line)}}
+
+/* products */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+.tab{font-family:var(--f-body);font-size:.92rem;font-weight:500;padding:.6em 1.3em;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--indigo);color:var(--indigo-ink);border-color:var(--indigo)}
+.plist{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.pitem{background:var(--surface);padding:22px 22px 24px;min-width:0}
+.pitem h3{font-size:1.05rem;font-weight:700}
+.pitem p{color:var(--muted);font-size:.88rem;margin-top:.3em}
+@media (max-width:820px){.plist{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.plist{grid-template-columns:1fr}}
+
+/* MVV */
+.mvv{display:grid;grid-template-columns:200px 1fr;border-top:1px solid color-mix(in srgb,var(--indigo-ink) 22%,transparent)}
+.mvv > *{padding:26px 0;border-bottom:1px solid color-mix(in srgb,var(--indigo-ink) 22%,transparent);min-width:0}
+.mvv dt{font-family:var(--f-label);letter-spacing:.24em;font-size:.8rem;text-transform:uppercase}
+.mvv dt span{display:block;font-family:var(--f-body);letter-spacing:.1em;font-size:.82rem;opacity:.75;text-transform:none}
+.mvv dd{margin:0;font-family:var(--f-display);font-size:clamp(1.1rem,2.2vw,1.4rem);line-height:1.7}
+.values{display:flex;flex-wrap:wrap;gap:10px 28px}
+.values b{color:var(--sun);font-weight:700}
+@media (max-width:640px){.mvv{grid-template-columns:1fr}.mvv dt{padding-bottom:0;border-bottom:0}}
+
+/* partners */
+.partners{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.partner{border:1px dashed var(--line);background:var(--surface);border-radius:4px;aspect-ratio:3/1;max-width:100%;display:grid;place-items:center;color:var(--muted);font-size:.8rem}
+.subhead{font-weight:700;margin:0 0 14px;display:flex;gap:12px;align-items:baseline}
+.subhead small{color:var(--muted);font-weight:400}
+
+/* news */
+.news{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.news li{display:grid;grid-template-columns:120px 110px 1fr;gap:16px;padding:20px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.news time{font-family:var(--f-label);font-variant-numeric:tabular-nums;color:var(--muted);font-size:.9rem}
+.cat{font-size:.75rem;border:1px solid var(--line);border-radius:3px;padding:.1em .7em;justify-self:start}
+.news a{text-decoration:none;min-width:0}
+.news a:hover{color:var(--sun)}
+@media (max-width:640px){.news li{grid-template-columns:auto 1fr;gap:6px 12px}.news a{grid-column:1/-1}}
+.split{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}
+
+/* company / recruit cards */
+.duo{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.duo a{display:block;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:28px;transition:border-color .2s}
+.duo a:hover{border-color:var(--sun)}
+.duo h3{font-family:var(--f-display);font-size:1.25rem;margin:.3em 0 .5em}
+.duo p{color:var(--muted);font-size:.92rem}
+@media (max-width:820px){.duo{grid-template-columns:1fr}}
+
+/* contact */
+.contact{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(32px,6vw,72px)}
+.tel{font-family:var(--f-label);font-size:clamp(1.8rem,4vw,2.4rem);letter-spacing:.04em;font-variant-numeric:tabular-nums;margin-top:.6em;user-select:all}
+.contact .muted{font-size:.85rem}
+form{display:grid;gap:16px;background:var(--surface);color:var(--ink);border-radius:6px;padding:clamp(20px,4vw,32px)}
+label{display:grid;gap:6px;font-size:.85rem;font-weight:500}
+input,select,textarea{font:inherit;font-size:1rem;padding:.7em .9em;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--ink);width:100%}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.note{font-size:.8rem;color:var(--muted)}
+.done{background:var(--sky);border-radius:4px;padding:12px 14px;font-size:.9rem}
+@media (max-width:820px){.contact{grid-template-columns:1fr}}
+@media (max-width:480px){.row2{grid-template-columns:1fr}}
+
+/* footer */
+footer{background:var(--surface);border-top:1px solid var(--line);font-size:.86rem}
+.fgrid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:32px;padding-block:56px 36px}
+.fgrid ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.fgrid a{text-decoration:none;color:var(--muted)}
+.fgrid a:hover{color:var(--sun)}
+.fgrid h4{margin:0 0 12px;font-family:var(--f-label);letter-spacing:.2em;font-size:.75rem;font-weight:500;text-transform:uppercase}
+.complaint{border-top:1px solid var(--line);padding-block:20px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+@media (max-width:820px){.fgrid{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.fgrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap" style="position:relative">
+    <a class="logo" href="#top" aria-label="トップへ">
+      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="none" stroke="var(--indigo)" stroke-width="2"/><path d="M5 21 A12 12 0 0 1 29 21" fill="none" stroke="var(--sun)" stroke-width="3" stroke-linecap="round"/><circle cx="17" cy="21" r="2.6" fill="var(--sun)"/></svg>
+      <span><span class="ph">〇〇保険株式会社</span><small>INSURANCE PARTNERS</small></span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">MENU</button>
+    <nav class="nav" id="nav" aria-label="メインメニュー">
+      <a href="#service">個人のお客様</a>
+      <a href="#service">法人のお客様</a>
+      <a href="#products">取扱商品</a>
+      <a href="#promise">お客様本位の業務運営</a>
+      <a href="#company">会社概要</a>
+      <a href="#company">採用情報</a>
+      <a class="btn btn-sun" href="#contact">無料で相談する</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="en" id="heroEn">A safe and happy future</p>
+        <h1 id="heroTitle">これからの暮らしに、<br><em>確かな安心</em>を。</h1>
+        <p class="lead" id="heroLead">特定の保険会社に偏らない立場で、複数社の保険をくらべてご提案します。ご納得いただけるまで、何度でもご相談ください。</p>
+        <div class="actions">
+          <a class="btn btn-sun" href="#contact">無料で相談する</a>
+          <a class="btn btn-line" href="#service">サービスを見る</a>
+        </div>
+        <div class="slides" role="tablist" aria-label="メインメッセージ切り替え">
+          <button role="tab" aria-current="true" aria-label="個人のお客様向けメッセージ" data-i="0"></button>
+          <button role="tab" aria-current="false" aria-label="法人のお客様向けメッセージ" data-i="1"></button>
+          <button role="tab" aria-current="false" aria-label="社会への貢献メッセージ" data-i="2"></button>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 400 400">
+          <circle cx="200" cy="200" r="186" fill="var(--surface)" stroke="var(--line)"/>
+          <circle cx="200" cy="200" r="140" fill="none" stroke="var(--line)" stroke-dasharray="2 6"/>
+          <path d="M60 250 A140 140 0 0 1 340 250 Z" fill="var(--indigo)"/>
+          <path d="M100 250 A100 100 0 0 1 300 250" fill="none" stroke="var(--sun)" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="200" cy="250" r="22" fill="var(--sun)"/>
+          <line x1="40" y1="250" x2="360" y2="250" stroke="var(--ink)" stroke-width="1.5"/>
+          <g fill="var(--muted)" font-family="Jost, sans-serif" font-size="11" letter-spacing="3">
+            <text x="200" y="290" text-anchor="middle">LIFE · NON-LIFE · CORPORATE</text>
+            <text x="200" y="312" text-anchor="middle">PLANNING</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIGURES -->
+  <section class="band">
+    <div class="wrap">
+      <dl class="figures">
+        <div class="figure"><dt>保有契約件数</dt><dd class="ph">00,000<span>件</span></dd><p class="muted">（20XX年XX月末時点）</p></div>
+        <div class="figure"><dt>契約継続率</dt><dd class="ph">00.0<span>%</span></dd><p class="muted">（20XX年度）</p></div>
+        <div class="figure"><dt>取扱保険会社</dt><dd class="ph">00<span>社</span></dd><p class="muted">生命保険・損害保険の合計</p></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- SERVICE -->
+  <section class="section" id="service">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Service</p>
+        <h2 class="h2">個人にも、法人にも。<br>それぞれに合った保障を設計します。</h2>
+        <p class="lead">ファイナンシャルプランナーがご家族の状況や事業の計画をうかがい、生命保険・損害保険を組み合わせて、ひとつのプランにまとめます。</p>
+      </div>
+      <div class="services">
+        <a class="service" href="#products">
+          <div class="img">
+            <svg viewBox="0 0 320 160" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><circle cx="250" cy="70" r="40" fill="var(--sun)" opacity=".85"/><path d="M0 130 Q80 90 160 120 T320 110 V160 H0Z" fill="var(--indigo)"/></svg>
+            <span class="tag">FOR PERSONAL</span>
+          </div>
+          <div class="body">
+            <h3>個人のお客様</h3>
+            <p>医療、がん、老後資金、お子さまの教育資金まで。ライフステージの変化にあわせて、保障を見直します。</p>
+            <span class="more">VIEW MORE →</span>
+          </div>
+        </a>
+        <a class="service" href="#products">
+          <div class="img">
+            <svg viewBox="0 0 320 160" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="var(--indigo)"><rect x="40" y="70" width="40" height="90"/><rect x="90" y="40" width="50" height="120"/><rect x="150" y="85" width="36" height="75"/><rect x="196" y="55" width="44" height="105"/></g><rect x="250" y="95" width="40" height="65" fill="var(--sun)"/></svg>
+            <span class="tag">FOR CORPORATE</span>
+          </div>
+          <div class="body">
+            <h3>法人のお客様</h3>
+            <p>事業承継、役員退職金の準備、福利厚生、事業リスクへの備えなど、経営の安定を保険の面から支えます。</p>
+            <span class="more">VIEW MORE →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- REASONS -->
+  <section class="section tint" id="promise">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Our Commitment</p>
+        <h2 class="h2">私たちが選ばれる、3つの理由</h2>
+        <p class="lead">お客様本位の業務運営方針（FD宣言）にもとづき、ご提案から契約後のフォローまで一貫して担当します。</p>
+      </div>
+      <div class="reasons">
+        <article class="reason">
+          <p class="num">REASON 1</p>
+          <h3>中立な立場で、<br>複数社をくらべて提案</h3>
+          <p>特定の保険会社に偏らず、各社の商品の特徴を比較したうえで、お客様にとって最適なものをご案内します。</p>
+        </article>
+        <article class="reason">
+          <p class="num">REASON 2</p>
+          <h3>ていねいなヒアリングを<br>プランに反映</h3>
+          <p>家計、家族構成、将来の計画をうかがい、必要な保障と保険料のバランスを一緒に考えます。</p>
+        </article>
+        <article class="reason">
+          <p class="num">REASON 3</p>
+          <h3>契約後も、<br>担当者が責任をもってフォロー</h3>
+          <p>住所変更や給付金の請求、保障の見直しなど、ご契約のあとも同じ担当者がお手伝いします。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="section" id="products">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Products</p>
+        <h2 class="h2">取扱商品</h2>
+        <p class="lead">生命保険 <span class="ph">00</span>社・損害保険 <span class="ph">00</span>社の商品を取り扱っています。</p>
+      </div>
+      <div class="tabs" role="tablist" aria-label="商品カテゴリ">
+        <button class="tab" role="tab" aria-selected="true" aria-controls="p-life" id="t-life">生命保険</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="p-nonlife" id="t-nonlife">損害保険</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="p-corp" id="t-corp">法人向け</button>
+      </div>
+      <div class="plist" id="p-life" role="tabpanel" aria-labelledby="t-life">
+        <div class="pitem"><h3>医療保険</h3><p>入院や手術に備えたい方へ</p></div>
+        <div class="pitem"><h3>がん保険</h3><p>がんの治療費と収入減に備えたい方へ</p></div>
+        <div class="pitem"><h3>終身保険</h3><p>一生涯の死亡保障を準備したい方へ</p></div>
+        <div class="pitem"><h3>定期保険</h3><p>子育て期など、一定期間の保障を手厚くしたい方へ</p></div>
+        <div class="pitem"><h3>個人年金保険</h3><p>老後の生活資金をコツコツ準備したい方へ</p></div>
+        <div class="pitem"><h3>学資・こども保険</h3><p>お子さまの教育資金を計画的に準備したい方へ</p></div>
+      </div>
+      <div class="plist" id="p-nonlife" role="tabpanel" aria-labelledby="t-nonlife" hidden>
+        <div class="pitem"><h3>自動車保険</h3><p>事故の賠償やご自身のケガに備えたい方へ</p></div>
+        <div class="pitem"><h3>火災保険</h3><p>住まいと家財を火災・自然災害から守りたい方へ</p></div>
+        <div class="pitem"><h3>地震保険</h3><p>地震・噴火・津波による損害に備えたい方へ</p></div>
+        <div class="pitem"><h3>傷害保険</h3><p>日常生活のケガに備えたい方へ</p></div>
+        <div class="pitem"><h3>個人賠償責任保険</h3><p>他人にケガをさせた場合などに備えたい方へ</p></div>
+        <div class="pitem"><h3>旅行保険</h3><p>国内・海外旅行中のトラブルに備えたい方へ</p></div>
+      </div>
+      <div class="plist" id="p-corp" role="tabpanel" aria-labelledby="t-corp" hidden>
+        <div class="pitem"><h3>事業保障</h3><p>経営者に万一があった場合の資金を確保したい企業へ</p></div>
+        <div class="pitem"><h3>役員退職金の準備</h3><p>計画的に退職慰労金を積み立てたい企業へ</p></div>
+        <div class="pitem"><h3>福利厚生プラン</h3><p>従業員の保障を手厚くしたい企業へ</p></div>
+        <div class="pitem"><h3>事業承継対策</h3><p>次の世代へ円滑に引き継ぎたい企業へ</p></div>
+        <div class="pitem"><h3>賠償責任保険</h3><p>業務中の事故やトラブルに備えたい企業へ</p></div>
+        <div class="pitem"><h3>財産・休業補償</h3><p>設備の損害や休業による損失に備えたい企業へ</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MVV -->
+  <section class="section band">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Philosophy</p>
+        <h2 class="h2">私たちの想い</h2>
+      </div>
+      <dl class="mvv">
+        <dt>Mission<span>使命</span></dt>
+        <dd><span class="ph">保険を通じて、ひとりひとりの安心で幸せな未来をつくる。</span></dd>
+        <dt>Vision<span>目指す姿</span></dt>
+        <dd><span class="ph">地域でいちばん信頼される、暮らしと経営の相談窓口になる。</span></dd>
+        <dt>Value<span>大切にすること</span></dt>
+        <dd class="values"><span><b>公平</b>　中立な立場で</span><span><b>誠実</b>　正直に伝える</span><span><b>継続</b>　長く寄り添う</span></dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section class="section">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Partners</p>
+        <h2 class="h2">取扱保険会社</h2>
+      </div>
+      <p class="subhead">生命保険会社 <small>（五十音順）</small></p>
+      <div class="partners" style="margin-bottom:32px">
+        <div class="partner">ロゴ</div><div class="partner">ロゴ</div><div class="partner">ロゴ</div><div class="partner">ロゴ</div><div class="partner">ロゴ</div><div class="partner">ロゴ</div><div class="partner">ロゴ</div><div class="partner">ロゴ</div>
+      </div>
+      <p class="subhead">損害保険会社 <small>（五十音順）</small></p>
+      <div class="partners">
+        <div class="partner">ロゴ</div><div class="partner">ロゴ</div><div class="partner">ロゴ</div><div class="partner">ロゴ</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  <section class="section tint">
+    <div class="wrap">
+      <div class="head split">
+        <div><p class="eyebrow">News</p><h2 class="h2">お知らせ</h2></div>
+        <a class="more" href="#top">一覧を見る →</a>
+      </div>
+      <ul class="news">
+        <li><time datetime="2026-11-01">2026.11.01</time><span class="cat">お知らせ</span><a href="#top">ホームページを開設しました</a></li>
+        <li><time datetime="2026-10-15">2026.10.15</time><span class="cat">店舗</span><a href="#top"><span class="ph">〇〇支店</span>を開設しました</a></li>
+        <li><time datetime="2026-10-01">2026.10.01</time><span class="cat">プレス</span><a href="#top"><span class="ph">〇〇保険株式会社</span>を設立しました</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- COMPANY / OFFICE / RECRUIT -->
+  <section class="section" id="company">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">About us</p>
+        <h2 class="h2">会社を知る</h2>
+      </div>
+      <div class="duo">
+        <a href="#top"><p class="eyebrow">Company</p><h3>会社概要</h3><p>代表メッセージ、会社概要、沿革をご紹介します。</p></a>
+        <a href="#top"><p class="eyebrow">Office</p><h3>支店一覧</h3><p>お近くの店舗で、対面でのご相談を承ります。</p></a>
+        <a href="#top"><p class="eyebrow">Recruit</p><h3>採用情報</h3><p>お客様の人生に寄り添う仕事を、一緒にしませんか。</p></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section band" id="contact">
+    <div class="wrap contact">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h2 class="h2">保険のこと、<br>まずは気軽にご相談ください。</h2>
+        <p class="lead">ご相談は何度でも無料です。店舗、オンライン、ご自宅への訪問からお選びいただけます。</p>
+        <p class="tel ph">00-0000-0000</p>
+        <p class="muted">受付時間　平日 9:00〜18:00（土日祝・年末年始を除く）</p>
+      </div>
+      <form id="form" novalidate>
+        <div class="row2">
+          <label for="f-name">お名前<input id="f-name" name="name" autocomplete="name" placeholder="山田 花子" required></label>
+          <label for="f-type">ご相談の種類
+            <select id="f-type" name="type"><option>個人の保険について</option><option>法人の保険について</option><option>保険の見直し</option><option>その他</option></select>
+          </label>
+        </div>
+        <label for="f-mail">メールアドレス<input id="f-mail" name="email" type="email" autocomplete="email" placeholder="hanako@example.com" required></label>
+        <label for="f-how">ご希望の相談方法
+          <select id="f-how" name="how"><option>店舗で相談</option><option>オンラインで相談</option><option>訪問を希望</option></select>
+        </label>
+        <label for="f-msg">ご相談内容（任意）<textarea id="f-msg" name="msg" rows="4" placeholder="例：子どもが生まれたので保障を見直したい"></textarea></label>
+        <button class="btn btn-sun" type="submit">相談を予約する</button>
+        <p class="note">※試作版のため、このフォームはまだ送信されません。</p>
+        <p class="done" id="done" hidden>入力内容を確認しました。公開時はここで送信完了のご案内を表示します。</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <a class="logo" href="#top"><span class="ph">〇〇保険株式会社</span></a>
+        <p class="muted" style="margin-top:12px;color:var(--muted)">〒<span class="ph">000-0000</span><br><span class="ph">東京都〇〇区〇〇 0-0-0</span><br>TEL <span class="ph">00-0000-0000</span></p>
+      </div>
+      <div><h4>Service</h4><ul><li><a href="#service">個人のお客様</a></li><li><a href="#service">法人のお客様</a></li><li><a href="#products">取扱商品</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#company">会社概要</a></li><li><a href="#company">支店一覧</a></li><li><a href="#company">採用情報</a></li><li><a href="#top">お知らせ</a></li></ul></div>
+      <div><h4>Policy</h4><ul><li><a href="#promise">お客様本位の業務運営方針</a></li><li><a href="#top">プライバシーポリシー</a></li><li><a href="#top">勧誘方針</a></li><li><a href="#top">保険募集指針</a></li><li><a href="#top">反社会的勢力排除に関する基本方針</a></li></ul></div>
+    </div>
+    <div class="complaint">
+      <span>苦情・ご相談窓口　<span class="ph">0120-000-000</span>（平日 9:00〜17:00）</span>
+      <span>© 2026 <span class="ph">〇〇 Insurance Inc.</span> All Rights Reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'), nav=document.getElementById('nav');
+  btn.addEventListener('click',function(){var o=nav.classList.toggle('open');btn.setAttribute('aria-expanded',o)});
+  nav.addEventListener('click',function(e){if(e.target.closest('a')){nav.classList.remove('open');btn.setAttribute('aria-expanded','false')}});
+
+  var slides=[
+    {en:'A safe and happy future',t:'これからの暮らしに、<br><em>確かな安心</em>を。',l:'特定の保険会社に偏らない立場で、複数社の保険をくらべてご提案します。ご納得いただけるまで、何度でもご相談ください。'},
+    {en:'Back up your business',t:'経営のリスクに、<br><em>備える力</em>を。',l:'事業保障、事業承継、福利厚生まで。経験とネットワークを生かして、企業の安定した成長を支えます。'},
+    {en:'For a sustainable society',t:'地域とともに、<br><em>続いていく</em>安心を。',l:'保険を通じて、人と地域が長く安心して暮らせる社会づくりに貢献します。'}
+  ];
+  var dots=document.querySelectorAll('.slides button'), cur=0, timer;
+  function show(i){cur=i;var s=slides[i];
+    document.getElementById('heroEn').textContent=s.en;
+    document.getElementById('heroTitle').innerHTML=s.t;
+    document.getElementById('heroLead').textContent=s.l;
+    dots.forEach(function(d,k){d.setAttribute('aria-current',k===i)});}
+  dots.forEach(function(d){d.addEventListener('click',function(){show(+d.dataset.i);restart()})});
+  function restart(){clearInterval(timer);if(!matchMedia('(prefers-reduced-motion: reduce)').matches)timer=setInterval(function(){show((cur+1)%slides.length)},6000)}
+  restart();
+
+  var tabs=document.querySelectorAll('.tab');
+  tabs.forEach(function(t){t.addEventListener('click',function(){
+    tabs.forEach(function(x){x.setAttribute('aria-selected',x===t);document.getElementById(x.getAttribute('aria-controls')).hidden=(x!==t)});
+  })});
+
+  document.getElementById('form').addEventListener('submit',function(e){e.preventDefault();document.getElementById('done').hidden=false});
+})();
+</script>
+</body>
+</html>
