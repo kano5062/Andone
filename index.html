@@ -286,6 +286,15 @@ footer{background:var(--surface);border-top:1px solid var(--line);font-size:.86r
         </div>
         <a class="btn btn-sun" data-travel-link href="#travel" target="_blank" rel="noopener">海外旅行保険を申し込む <span class="ext" aria-hidden="true">↗</span><span class="sr-only">（新しいタブで開きます）</span></a>
       </div>
+      <div class="travel" style="margin-top:16px">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="var(--sky)"/><path d="M12 38 Q14 30 22 29 L27 23 Q30 21 36 21 L42 21 Q46 21 49 26 L51 29 Q54 30 54 34 L54 38 Z" fill="var(--indigo)"/><circle cx="22" cy="39" r="5" fill="var(--sun)"/><circle cx="45" cy="39" r="5" fill="var(--sun)"/><path d="M30 25 L35 25 L35 29 L28 29 Z M38 25 L42 25 Q44 25 45 29 L38 29 Z" fill="var(--sky)"/></svg>
+        <div>
+          <p class="eyebrow">Classic Car Insurance</p>
+          <h2>製造から25年以上の愛車にも、車両保険を</h2>
+          <p class="desc">Chubb損害保険のクラシックカー保険なら、市場価格を考えた金額で車両保険に入れます。お見積りはフォームから。</p>
+        </div>
+        <a class="btn btn-line" href="classiccar.html">クラシックカー保険を見る →</a>
+      </div>
     </div>
   </section>
 
@@ -548,7 +557,7 @@ footer{background:var(--surface);border-top:1px solid var(--line);font-size:.86r
         <a class="logo" href="#top"><img src="assets/logo.jpg" alt="" width="44" height="44"><span>And ONE株式会社</span></a>
         <p class="muted" style="margin-top:12px;color:var(--muted)">本社　〒490-1143<br>愛知県海部郡大治町砂子中割2304<br>TEL 052-431-7818　FAX 052-431-7827<br><br>福岡支社　〒802-0001<br>福岡県北九州市小倉北区浅野2-14-1 KMMビル5F<br>TEL 093-521-8288　FAX 093-521-8588</p>
       </div>
-      <div><h4>Service</h4><ul><li><a href="#service">個人のお客様</a></li><li><a href="#service">法人のお客様</a></li><li><a href="#products">取扱商品</a></li></ul></div>
+      <div><h4>Service</h4><ul><li><a href="#service">個人のお客様</a></li><li><a href="#service">法人のお客様</a></li><li><a href="#products">取扱商品</a></li><li><a href="classiccar.html">クラシックカー保険</a></li></ul></div>
       <div><h4>Company</h4><ul><li><a href="#company">会社概要</a></li><li><a href="#company">拠点一覧</a></li><li><a href="#company">採用情報</a></li><li><a href="#top">お知らせ</a></li><li><a href="#contact">お問い合わせ</a></li></ul></div>
       <div><h4>Policy</h4><ul><li><a href="policy.html">お客様本位の業務運営方針</a></li><li><a href="bcp.html">BCP対策</a></li><li><a href="privacy.html">個人情報保護方針（プライバシーポリシー）</a></li><li><a href="#top">勧誘方針</a></li><li><a href="#top">保険募集指針</a></li><li><a href="#top">反社会的勢力排除に関する基本方針</a></li></ul></div>
     </div>
@@ -559,15 +568,10 @@ footer{background:var(--surface);border-top:1px solid var(--line);font-size:.86r
   </div>
 </footer>
 
+<script src="assets/form-keys.js"></script>
 <script>
 // 海外旅行保険の申込先。リンク先が変わったらこの1行だけ書き換える
 var TRAVEL_INSURANCE_URL='https://www.chubbtravelinsurance.jp/?brokerCode=ailead';
-// お問い合わせフォームの送り先（Web3Forms のアクセスキー）。
-// メールアドレスはここに書かない：キーごとに登録したアドレスへ届くので、ページを見てもアドレスは分からない
-var CONTACT_FORM_KEYS={
-  honsha:'',   // 本社（aichi@ で発行したキー）
-  fukuoka:''   // 福岡支社（fukuoka@ で発行したキー）
-};
 (function(){
   document.querySelectorAll('[data-travel-link]').forEach(function(a){a.href=TRAVEL_INSURANCE_URL});
 

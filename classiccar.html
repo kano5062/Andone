@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>クラシックカー保険｜And ONE株式会社</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Jost:wght@400;500&display=swap">
+<style>
+/* トップページ（index.html）と同じ色・書体。本文は読みやすさ優先で1カラム */
+:root{
+  --bg:#F7F8F7; --surface:#FFFFFF; --ink:#141B1D; --muted:#56666A; --line:#DCE3E3;
+  --indigo:#123B42; --indigo-ink:#F1F7F7; --sky:#E2F1F1; --sun:#D3222B; --sun-ink:#FFFFFF;
+  --f-display:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  --f-body:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  --f-label:"Jost","Helvetica Neue",Arial,sans-serif;
+  --gutter-l:max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r:max(16px, env(safe-area-inset-right, 0px));
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D1517; --surface:#142023; --ink:#E5EDED; --muted:#98AAAD; --line:#27373A;
+  --indigo:#163238; --indigo-ink:#E5EDED; --sky:#18292C; --sun:#F0545B; --sun-ink:#1A0A0B; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D1517; --surface:#142023; --ink:#E5EDED; --muted:#98AAAD; --line:#27373A;
+  --indigo:#163238; --indigo-ink:#E5EDED; --sky:#18292C; --sun:#F0545B; --sun-ink:#1A0A0B; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.95;letter-spacing:.02em}
+a{color:inherit}
+a:focus-visible{outline:2px solid var(--sun);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
+.ph{background:color-mix(in srgb,var(--sun) 16%,transparent);border-bottom:1px dashed var(--sun);padding:0 .2em}
+
+.site-header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.site-header .wrap{display:flex;align-items:center;gap:16px;min-height:72px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--f-display);font-weight:700;font-size:1.2rem;letter-spacing:.06em;white-space:nowrap}
+.logo img{width:44px;height:44px;border-radius:50%;display:block}
+.logo small{display:block;font-family:var(--f-label);font-size:.62rem;letter-spacing:.24em;color:var(--muted);font-weight:500;line-height:1}
+.back{margin-left:auto;font-size:.88rem;font-weight:500;text-decoration:none;white-space:nowrap}
+.back:hover{color:var(--sun)}
+@media (max-width:480px){.logo small{display:none}.logo{font-size:1.05rem}}
+
+.page-head{background:var(--indigo);color:var(--indigo-ink);padding-block:clamp(48px,8vw,88px)}
+.eyebrow{font-family:var(--f-label);letter-spacing:.3em;font-size:.75rem;text-transform:uppercase;color:var(--sun);margin:0 0 .8em}
+.page-head h1{font-family:var(--f-display);font-size:clamp(1.6rem,4vw,2.4rem);line-height:1.5;margin:0;text-wrap:balance}
+
+.doc{max-width:760px;margin:0 auto;padding:clamp(40px,7vw,72px) 0 clamp(64px,9vw,112px)}
+.doc p{margin:0 0 1em}
+.doc h2{font-family:var(--f-display);font-size:clamp(1.15rem,2.6vw,1.4rem);line-height:1.6;margin:2.6em 0 .8em;padding-top:1.2em;border-top:1px solid var(--line);scroll-margin-top:88px}
+.doc h3{font-size:1rem;font-weight:700;margin:1.6em 0 .4em}
+.doc ul,.doc ol{margin:0 0 1em;padding-left:1.6em}
+.doc li{margin:.3em 0}
+.toc{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:20px 24px;margin:2em 0 0}
+.toc p{font-family:var(--f-label);letter-spacing:.2em;font-size:.75rem;text-transform:uppercase;color:var(--muted);margin:0 0 .6em}
+.toc ol{margin:0;padding-left:1.4em;display:grid;gap:2px;font-size:.92rem}
+.toc a{text-decoration:none}
+.toc a:hover{color:var(--sun);text-decoration:underline}
+.contact-box{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:20px 24px;margin:0 0 1.4em}
+.contact-box dl{display:grid;grid-template-columns:auto 1fr;gap:4px 20px;margin:0}
+.contact-box dt{color:var(--muted);white-space:nowrap}
+.contact-box dd{margin:0;min-width:0;overflow-wrap:anywhere}
+@media (max-width:480px){.contact-box dl{grid-template-columns:1fr}.contact-box dd{margin-bottom:.6em}}
+.sign{text-align:right;margin-top:2.4em!important;color:var(--muted)}
+
+footer{background:var(--surface);border-top:1px solid var(--line);font-size:.86rem;color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;padding-block:24px}
+footer a{text-decoration:none}
+footer a:hover{color:var(--sun)}
+.intro{font-family:var(--f-display);font-size:clamp(1.2rem,2.8vw,1.6rem);line-height:1.8;margin:0 0 .8em}
+.intro em{font-style:normal;color:var(--sun)}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:20px 24px;margin:0 0 1.4em}
+.reqs{list-style:none;padding:0!important;margin:0 0 .8em!important;display:grid;gap:8px}
+.reqs li{display:flex;gap:10px;align-items:flex-start;margin:0!important}
+.reqs li::before{content:"";flex:none;width:20px;height:20px;margin-top:.35em;border-radius:50%;background:var(--sun) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10l3 3 7-7' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat}
+.points{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0 0 1.4em}
+.point{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:20px 22px;min-width:0}
+.point .n{font-family:var(--f-label);letter-spacing:.2em;font-size:.72rem;color:var(--sun)}
+.point h3{margin:.3em 0 .5em!important;font-size:1.02rem;line-height:1.6}
+.point p{font-size:.92rem;margin:0}
+@media (max-width:640px){.points{grid-template-columns:1fr}}
+.notes{font-size:.82rem;color:var(--muted)}
+.notes p{margin:0 0 .6em}
+.cta{display:inline-flex;align-items:center;gap:.5em;background:var(--sun);color:var(--sun-ink);border-radius:999px;padding:.8em 1.6em;font-weight:700;text-decoration:none;margin:.4em 0 1.4em}
+.cta:hover{transform:translateY(-2px)}
+/* form */
+form{display:grid;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:clamp(20px,4vw,32px)}
+form fieldset{border:0;padding:0;margin:0;min-width:0}
+form legend{font-size:.85rem;font-weight:700;margin-bottom:6px;padding:0}
+.grp{font-family:var(--f-display);font-weight:700;font-size:1.05rem;border-bottom:1px solid var(--line);padding-bottom:6px;margin-top:8px}
+label{display:grid;gap:6px;font-size:.85rem;font-weight:500}
+input,select,textarea{font:inherit;font-size:1rem;padding:.7em .9em;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--ink);width:100%}
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible{outline:2px solid var(--sun);outline-offset:3px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.opts{display:flex;flex-wrap:wrap;gap:8px 18px;font-weight:400;font-size:.95rem}
+.opts label{display:flex;gap:8px;align-items:center;font-size:.95rem;font-weight:400}
+.opts input,.check input,.dest input{width:auto;accent-color:var(--sun);margin:0}
+.dest{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dest label{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:6px;padding:14px;cursor:pointer;background:var(--bg);font-size:.95rem;font-weight:700}
+.dest label:has(input:checked){border-color:var(--sun);box-shadow:inset 0 0 0 1px var(--sun)}
+.req{color:var(--sun);font-size:.72rem;font-weight:700;margin-left:.5em}
+.hint{font-size:.78rem;color:var(--muted);font-weight:400}
+.check{display:flex;gap:10px;align-items:flex-start;font-weight:400}
+.check input{margin-top:.35em}
+.hp{position:absolute;left:-9999px}
+.submit{justify-self:start;background:var(--sun);color:var(--sun-ink);border:0;border-radius:999px;padding:.85em 2em;font:inherit;font-weight:700;cursor:pointer}
+.submit:disabled{opacity:.6;cursor:wait}
+.msg{background:var(--sky);border-radius:4px;padding:12px 14px;font-size:.9rem;margin:0}
+.msg.err{background:color-mix(in srgb,var(--sun) 14%,var(--surface))}
+@media (max-width:560px){.row2,.row3,.dest{grid-template-columns:1fr}}
+.related{margin-top:3em;padding-top:1.4em;border-top:1px solid var(--line);font-size:.92rem}
+.related a{color:var(--sun)}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="index.html"><img src="assets/logo.jpg" alt="" width="44" height="44"><span>And ONE株式会社<small>AND ONE INCORPORATED</small></span></a>
+    <a class="back" href="index.html">← トップへ戻る</a>
+  </div>
+</header>
+
+<main>
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">Classic Car Insurance</p>
+      <h1>クラシックカー保険</h1>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <article class="doc">
+      <p class="intro">やっと手に入れたクラシックカー。<br>車両保険に加入できず、困ったことはありませんか？</p>
+      <p>当社取扱いの<b>Chubb（チャブ）損害保険</b>なら、製造から年数のたったお車でも<b>車両保険の引き受けが可能</b>です。また、現在ご加入中の自動車保険のノンフリート等級・事故有係数適用期間も引き継ぐことができます。</p>
+      <a class="cta" href="#form">無料でお見積り・お問い合わせ ↓</a>
+
+      <h2 id="target">ご案内できるお車</h2>
+      <div class="box">
+        <ul class="reqs">
+          <li>製造年から25年以上経過した国産車および輸入車</li>
+          <li>年間走行距離が5,000km以内</li>
+          <li>通常走行が可能な状態にある登録車両（ナンバープレートの付いた車両）</li>
+          <li>原則、車両保険が付保されていること</li>
+        </ul>
+        <p style="margin:0">上記すべてを満たすお車に、Chubb損害保険のクラシックカー保険をご案内できます。</p>
+      </div>
+      <p>苦労して手に入れた車なのに、製造年が古いからといって車両保険に入れない――。Chubbのクラシックカー保険なら、製造年から25年以上たったお車に対して、市場価格を考慮した金額で車両保険を提供できます。</p>
+      <p>お車の市場価格、コンディション、保管状況等を考慮して、ご契約金額を協定します。適切な車両保険金額で契約できるので、万が一の事故の際も安心です。</p>
+
+      <h2 id="points">4つのポイント</h2>
+      <div class="points">
+        <div class="point"><p class="n">POINT 1</p><h3>市場価格を考えた金額で、車両保険に入れる</h3><p>製造年から25年以上たったお車でも、市場価格を考慮した車両保険金額でご契約いただけます。</p></div>
+        <div class="point"><p class="n">POINT 2</p><h3>条件を満たせば保険料が20％割引</h3><p>「1975年以前に製造」「年間走行距離2,000km以内」の両方を満たす場合、クラシックカー特有の使い方を考えて20％割引します（チャブ保険社内比。詳しくはお問い合わせください）。</p></div>
+        <div class="point"><p class="n">POINT 3</p><h3>急なトラブルに備えるロードサービス</h3><p>事故や故障で走れなくなったとき、修理工場までの運搬費用、臨時の帰宅・移動・宿泊の費用、修理後の引き取り費用などを補償します（ロードサービス費用補償特約）。</p></div>
+        <div class="point"><p class="n">POINT 4</p><h3>地震による損害も保険金額まで（オプション）</h3><p>通常の車両保険では対象外の地震・噴火・津波による損害も、「車両地震保険※」を付けると、削減なく保険金額まで補償できます。</p></div>
+      </div>
+      <div class="notes">
+        <p>※「車両地震保険」の正式名称は、地震・噴火・津波危険「車両損害」補償特約で、車両保険に付帯することができます。</p>
+        <p>※「クラシックカー保険」は「家庭用自動車保険」および「一般用自動車保険」のペットネームのひとつです。商品の詳細は「クラシックカー保険」リーフレット、商品パンフレット「家庭用自動車保険」または「一般用自動車保険」、「契約のしおり」および「重要事項説明書」等をご参照ください。ご不明な点は、当社またはChubb損害保険株式会社までお問い合わせください。</p>
+        <p>※ Chubb（チャブ）保険の正式名称はChubb損害保険株式会社です。詳しくは<a href="https://www.chubb.com/jp-jp/" target="_blank" rel="noopener">Chubb損害保険株式会社のホームページ</a>をご覧ください。</p>
+      </div>
+
+      <h2 id="price">保険料の例</h2>
+      <p><span class="ph">最新の保険料例を準備中です。</span>お車ごとにお見積りしますので、下のフォームからお気軽にお問い合わせください。</p>
+
+      <h2 id="form">お見積り・お問い合わせフォーム</h2>
+      <p>わかる範囲でご記入ください。担当者より折り返しご連絡いたします。受付時間　平日 9:00〜17:00</p>
+      <form id="ccForm" novalidate>
+        <fieldset>
+          <legend>お問い合わせ先<span class="req">必須</span></legend>
+          <div class="dest">
+            <label><input type="radio" name="office" value="honsha" required>本社（愛知）</label>
+            <label><input type="radio" name="office" value="fukuoka" required>福岡支社</label>
+          </div>
+        </fieldset>
+
+        <p class="grp">お客様について</p>
+        <div class="row2"><label><span>お名前<span class="req">必須</span></span><input type="text" name="name" required autocomplete="name"></label><label><span>会社名（法人の場合）</span><input type="text" name="company"></label></div>
+        <div class="row2"><label><span>電話番号<span class="req">必須</span></span><input type="tel" name="phone" required autocomplete="tel"></label><label><span>メールアドレス<span class="req">必須</span></span><input type="email" name="email" required autocomplete="email"></label></div>
+        <div class="row3"><label><span>郵便番号</span><input type="text" name="zip" autocomplete="postal-code" inputmode="numeric"></label><label><span>都道府県</span><select name="pref"><option value="">選択してください</option><option>北海道</option><option>青森県</option><option>岩手県</option><option>宮城県</option><option>秋田県</option><option>山形県</option><option>福島県</option><option>茨城県</option><option>栃木県</option><option>群馬県</option><option>埼玉県</option><option>千葉県</option><option>東京都</option><option>神奈川県</option><option>新潟県</option><option>富山県</option><option>石川県</option><option>福井県</option><option>山梨県</option><option>長野県</option><option>岐阜県</option><option>静岡県</option><option>愛知県</option><option>三重県</option><option>滋賀県</option><option>京都府</option><option>大阪府</option><option>兵庫県</option><option>奈良県</option><option>和歌山県</option><option>鳥取県</option><option>島根県</option><option>岡山県</option><option>広島県</option><option>山口県</option><option>徳島県</option><option>香川県</option><option>愛媛県</option><option>高知県</option><option>福岡県</option><option>佐賀県</option><option>長崎県</option><option>熊本県</option><option>大分県</option><option>宮崎県</option><option>鹿児島県</option><option>沖縄県</option></select></label><span></span></div>
+        <label><span>市区町村・番地</span><input type="text" name="address1" autocomplete="address-line1"></label>
+        <label><span>建物名・部屋番号</span><input type="text" name="address2" autocomplete="address-line2"></label>
+        <fieldset><legend>免許証の色</legend><div class="opts"><label><input type="radio" name="license" value="ゴールド">ゴールド</label><label><input type="radio" name="license" value="ブルー">ブルー</label><label><input type="radio" name="license" value="グリーン">グリーン</label></div></fieldset>
+
+        <p class="grp">お車について</p>
+        <label><span>メーカー名・モデル・仕様など<span class="req">必須</span></span><textarea name="car" rows="3" required placeholder="例：ニッサン スカイライン GT-R"></textarea></label>
+        <div class="row2"><label><span>型式</span><input type="text" name="model_code" placeholder="例：KPGC10"></label><label><span>製造年<span class="req">必須</span></span><input type="text" name="year" required placeholder="例：1973年"></label></div>
+        <div class="row3"><label><span>排気量</span><input type="text" name="cc" placeholder="例：2,000cc"></label><label><span>年間走行距離<span class="req">必須</span></span><input type="text" name="mileage" required placeholder="例：2,000km"></label><label><span>希望する車両保険金額</span><input type="text" name="amount" placeholder="例：500万円"></label></div>
+        <fieldset><legend>保管状況</legend><div class="opts"><label><input type="checkbox" name="storage" value="自宅と同一敷地">自宅と同一敷地</label><label><input type="checkbox" name="storage" value="その他の場所">その他の場所</label></div></fieldset>
+        <label><span>保管状況の補足 <span class="hint">（その他の場所の場合）</span></span><input type="text" name="storage_note"></label>
+        <fieldset><legend>車庫の構造</legend><div class="opts"><label><input type="checkbox" name="garage" value="ガレージシャッター">ガレージシャッター</label><label><input type="checkbox" name="garage" value="地下駐車場">地下駐車場</label><label><input type="checkbox" name="garage" value="屋根付き駐車場">屋根付き駐車場</label><label><input type="checkbox" name="garage" value="露天駐車場">露天駐車場</label><label><input type="checkbox" name="garage" value="その他">その他</label></div></fieldset>
+        <label><span>車庫の補足 <span class="hint">（その他の場合）</span></span><input type="text" name="garage_note"></label>
+
+        <p class="grp">現在の自動車保険について</p>
+        <div class="row2"><label><span>現在ご加入中の保険の等級</span><select name="grade"><option value="">選択してください</option><option>20等級</option><option>19等級</option><option>18等級</option><option>17等級</option><option>16等級</option><option>15等級</option><option>14等級</option><option>13等級</option><option>12等級</option><option>11等級</option><option>10等級</option><option>9等級</option><option>8等級</option><option>7等級</option><option>6等級</option><option>5等級</option><option>4等級</option><option>3等級</option><option>2等級</option><option>1等級</option></select></label><label><span>事故有係数適用期間</span><select name="accident"><option value="">選択してください</option><option>0年</option><option>1年</option><option>2年</option><option>3年</option><option>4年</option><option>5年</option><option>6年</option></select></label></div>
+        <div class="row2"><label><span>保険始期日</span><input type="date" name="start"></label><label><span>保険満期日</span><input type="date" name="end"></label></div>
+        <label><span>その他（ご要望など）</span><textarea name="message" rows="4"></textarea></label>
+
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label class="check"><input type="checkbox" name="agree" required><span>入力した個人情報を、お見積り・お問い合わせへの回答のために利用することに同意します。（<a href="privacy.html" target="_blank" rel="noopener">個人情報保護方針</a>）</span></label>
+        <button class="submit" type="submit">送信する</button>
+        <p class="msg" id="ccMsg" role="status" hidden></p>
+      </form>
+
+      <h2 id="safety">セーフティネット・保険会社破綻時の取扱い</h2>
+      <div class="notes">
+        <p><b>＜セーフティネットに関わる記載＞</b><br>Chubb損害保険株式会社は、法律で定められた指定紛争解決機関である一般社団法人保険オンブズマンと手続実施基本契約を締結しています。Chubb損害保険株式会社との間で問題を解決できない場合には、解決の申立てを行うことができます。<br>一般社団法人保険オンブズマン　TEL 03-5425-7963<br>受付時間：午前9時～12時、午後1時～5時（土・日・祝日・年末年始を除きます）<br><a href="https://www.hoken-ombs.or.jp/" target="_blank" rel="noopener">https://www.hoken-ombs.or.jp/</a></p>
+        <p><b>＜保険会社破綻時の取扱い＞</b><br>引受保険会社の経営が破綻した場合には、保険金や解約返れい金の支払いが一定期間凍結されたり、金額が削減されることがあります。引受保険会社の経営が破綻した場合に備えた保険契約者保護の仕組みとして「損害保険契約者保護機構」があり、事故に関する保険金や解約返れい金は次の割合で補償されます。<br>解約返れい金：補償割合80%<br>保険金支払い：破綻後3か月間は全額支払（補償割合100%）、3か月経過後は補償割合80%<br>具体的な内容は、Chubb損害保険株式会社ホームページをご覧いただくか、Chubb損害保険株式会社までお問い合わせください。</p>
+      </div>
+      <p class="related">関連：<a href="index.html#products">取扱商品</a>　／　<a href="policy.html">お客様本位の業務運営に関する方針</a></p>
+    </article>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="index.html">And ONE株式会社 トップページ</a>
+    <span>© 2026 And ONE Inc. All Rights Reserved.</span>
+  </div>
+</footer>
+
+<script src="assets/form-keys.js"></script>
+<script>
+(function(){
+  var form=document.getElementById('ccForm'), msg=document.getElementById('ccMsg');
+  var OFFICE_NAME={honsha:'本社（愛知）',fukuoka:'福岡支社'};
+  var LABELS={office:'お問い合わせ先'};
+  function say(t,err){msg.textContent=t;msg.hidden=false;msg.classList.toggle('err',!!err)}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!form.checkValidity()){
+      var bad=form.querySelector('input:invalid,textarea:invalid');
+      say(bad.name==='office'?'お問い合わせ先（本社・福岡支社）を選んでください。':bad.name==='agree'?'個人情報の取り扱いへの同意にチェックを入れてください。':'必須の項目（お名前・電話番号・メールアドレス・お車の情報・製造年・年間走行距離）を入力してください。',true);
+      bad.focus();return;
+    }
+    var fd=new FormData(form), office=fd.get('office'), key=CONTACT_FORM_KEYS[office];
+    if(!key){say('フォームは現在準備中です。お手数ですが、お電話でお問い合わせください。',true);return}
+    function v(n){return fd.getAll(n).join('、')}
+    var data={access_key:key,subject:'【HPクラシックカー保険】'+OFFICE_NAME[office]+'／'+v('name')+' 様',from_name:'And ONE ホームページ',
+      お問い合わせ先:OFFICE_NAME[office],name:v('name'),会社名:v('company'),電話番号:v('phone'),email:v('email'),
+      住所:['〒'+v('zip'),v('pref'),v('address1'),v('address2')].join(' '),免許証の色:v('license'),
+      'メーカー・モデル・仕様':v('car'),型式:v('model_code'),製造年:v('year'),排気量:v('cc'),年間走行距離:v('mileage'),希望車両保険金額:v('amount'),
+      保管状況:v('storage')+(v('storage_note')?'（'+v('storage_note')+'）':''),車庫の構造:v('garage')+(v('garage_note')?'（'+v('garage_note')+'）':''),
+      現在の等級:v('grade'),事故有係数適用期間:v('accident'),保険始期日:v('start'),保険満期日:v('end'),message:v('message'),botcheck:form.botcheck.checked};
+    var b=form.querySelector('button[type=submit]');b.disabled=true;say('送信しています…');
+    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(data)})
+      .then(function(r){return r.json()})
+      .then(function(j){if(!j.success)throw 0;form.reset();say('送信しました。'+OFFICE_NAME[office]+'の担当者より、折り返しご連絡いたします。')})
+      .catch(function(){say('送信できませんでした。時間をおいて再度お試しいただくか、お電話でお問い合わせください。',true)})
+      .then(function(){b.disabled=false});
+  });
+})();
+</script>
+</body>
+</html>
