@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>お客様本位の業務運営に関する方針｜And ONE株式会社</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Jost:wght@400;500&display=swap">
+<style>
+/* トップページ（index.html）と同じ色・書体。本文は読みやすさ優先で1カラム */
+:root{
+  --bg:#F7F8F7; --surface:#FFFFFF; --ink:#141B1D; --muted:#56666A; --line:#DCE3E3;
+  --indigo:#123B42; --indigo-ink:#F1F7F7; --sky:#E2F1F1; --sun:#D3222B; --sun-ink:#FFFFFF;
+  --f-display:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  --f-body:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  --f-label:"Jost","Helvetica Neue",Arial,sans-serif;
+  --gutter-l:max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r:max(16px, env(safe-area-inset-right, 0px));
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D1517; --surface:#142023; --ink:#E5EDED; --muted:#98AAAD; --line:#27373A;
+  --indigo:#163238; --indigo-ink:#E5EDED; --sky:#18292C; --sun:#F0545B; --sun-ink:#1A0A0B; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D1517; --surface:#142023; --ink:#E5EDED; --muted:#98AAAD; --line:#27373A;
+  --indigo:#163238; --indigo-ink:#E5EDED; --sky:#18292C; --sun:#F0545B; --sun-ink:#1A0A0B; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.95;letter-spacing:.02em}
+a{color:inherit}
+a:focus-visible{outline:2px solid var(--sun);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
+.ph{background:color-mix(in srgb,var(--sun) 16%,transparent);border-bottom:1px dashed var(--sun);padding:0 .2em}
+
+.site-header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.site-header .wrap{display:flex;align-items:center;gap:16px;min-height:72px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--f-display);font-weight:700;font-size:1.2rem;letter-spacing:.06em;white-space:nowrap}
+.logo img{width:44px;height:44px;border-radius:50%;display:block}
+.logo small{display:block;font-family:var(--f-label);font-size:.62rem;letter-spacing:.24em;color:var(--muted);font-weight:500;line-height:1}
+.back{margin-left:auto;font-size:.88rem;font-weight:500;text-decoration:none;white-space:nowrap}
+.back:hover{color:var(--sun)}
+@media (max-width:480px){.logo small{display:none}.logo{font-size:1.05rem}}
+
+.page-head{background:var(--indigo);color:var(--indigo-ink);padding-block:clamp(48px,8vw,88px)}
+.eyebrow{font-family:var(--f-label);letter-spacing:.3em;font-size:.75rem;text-transform:uppercase;color:var(--sun);margin:0 0 .8em}
+.page-head h1{font-family:var(--f-display);font-size:clamp(1.6rem,4vw,2.4rem);line-height:1.5;margin:0;text-wrap:balance}
+
+.doc{max-width:760px;margin:0 auto;padding:clamp(40px,7vw,72px) 0 clamp(64px,9vw,112px)}
+.doc p{margin:0 0 1em}
+.doc h2{font-family:var(--f-display);font-size:clamp(1.15rem,2.6vw,1.4rem);line-height:1.6;margin:2.6em 0 .8em;padding-top:1.2em;border-top:1px solid var(--line);scroll-margin-top:88px}
+.doc h3{font-size:1rem;font-weight:700;margin:1.6em 0 .4em}
+.doc ul,.doc ol{margin:0 0 1em;padding-left:1.6em}
+.doc li{margin:.3em 0}
+.toc{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:20px 24px;margin:2em 0 0}
+.toc p{font-family:var(--f-label);letter-spacing:.2em;font-size:.75rem;text-transform:uppercase;color:var(--muted);margin:0 0 .6em}
+.toc ol{margin:0;padding-left:1.4em;display:grid;gap:2px;font-size:.92rem}
+.toc a{text-decoration:none}
+.toc a:hover{color:var(--sun);text-decoration:underline}
+.contact-box{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:20px 24px;margin:0 0 1.4em}
+.contact-box dl{display:grid;grid-template-columns:auto 1fr;gap:4px 20px;margin:0}
+.contact-box dt{color:var(--muted);white-space:nowrap}
+.contact-box dd{margin:0;min-width:0;overflow-wrap:anywhere}
+@media (max-width:480px){.contact-box dl{grid-template-columns:1fr}.contact-box dd{margin-bottom:.6em}}
+.sign{text-align:right;margin-top:2.4em!important;color:var(--muted)}
+
+footer{background:var(--surface);border-top:1px solid var(--line);font-size:.86rem;color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;padding-block:24px}
+footer a{text-decoration:none}
+footer a:hover{color:var(--sun)}
+.lead-quote{font-family:var(--f-display);font-size:clamp(1.05rem,2.2vw,1.25rem);line-height:1.9;border-left:3px solid var(--sun);padding:.2em 0 .2em 1em;margin:0 0 1.4em}
+.tbl{width:100%;border-collapse:collapse;margin:0 0 1.4em;background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.tbl th,.tbl td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line)}
+.tbl th{font-size:.82rem;color:var(--muted);font-weight:500;background:var(--sky)}
+.tbl td:last-child{font-family:var(--f-label);font-size:1.1rem;letter-spacing:.04em;white-space:nowrap}
+.tbl tr:last-child td{border-bottom:0}
+.related{margin-top:3em;padding-top:1.4em;border-top:1px solid var(--line);font-size:.92rem}
+.related a{color:var(--sun)}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="index.html"><img src="assets/logo.jpg" alt="" width="44" height="44"><span>And ONE株式会社<small>AND ONE INCORPORATED</small></span></a>
+    <a class="back" href="index.html">← トップへ戻る</a>
+  </div>
+</header>
+
+<main>
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">Customer First</p>
+      <h1>お客様本位の業務運営に関する方針</h1>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <article class="doc">
+      <p>And ONE 株式会社（以下、当社といいます。）は、「世の中で一番ありがとうと言って頂ける存在を目指す」という理念のもと、全社員一丸となってお客様の幸せに貢献し、お客様とともに成長し続ける企業でありたいと願っております。</p>
+      <p>社会は常に変化し、またそれに伴い人々を取り巻く環境も常に変化し続けております。</p>
+      <p>今後も変化し続ける社会環境と向かい合いながら、「地域のお客様に、安心と幸福をお届けする」ことを普遍的な理念と捉え、金融サービスを通じて、お客様の幸せと地域社会の発展のために尽力して参ります。</p>
+      <p>このたび、当社は、これまで取り組んできた金融サービスが、より一層お客様の幸せの向上に繋がるように業務運営の品質向上に邁進する必要があると認識し、2026年12月1日付けにて「お客様本位の業務運営に関する方針」を策定いたしましたので、公表いたします。</p>
+      <p>当社のコンサルティングは、「真のプロフェッショナルであるという誇りと責任を持ち、顧客の利益を最優先して行動する」「常に自分の為でなく誰の為かを考え行動する」という強い想いを軸にしています。</p>
+      <p>そのうえで、お客様本位の良質な保険商品・サービスの提供を通じて、お客様の最善の利益を追求することをお約束いたします。</p>
+      <p>当社は、今後もより良いサービスの提供を行うため、この方針に示された理念を継続・発展させ、お客様本位の業務運営の基本としてさらなる徹底を図って参ります。</p>
+      <p class="sign">2026年12月1日 策定<br>And ONE 株式会社<br>代表取締役　有吉 公一郎</p>
+
+      <nav class="toc" aria-label="目次">
+        <p>Contents</p>
+        <ol>
+          <li><a href="#mission">Mission / Vision</a></li>
+          <li><a href="#p1">方針１　お客様の経済的不安解消のための取り組み</a></li>
+          <li><a href="#p2">方針２　アフターフォローの取り組み</a></li>
+          <li><a href="#p3">方針３　利益相反の適切な管理</a></li>
+          <li><a href="#p4">方針４　お客様の声を経営に反映させる取り組み</a></li>
+          <li><a href="#p5">方針５　お客様本位の業務運営の浸透に向けた取り組み</a></li>
+        </ol>
+      </nav>
+
+      <h2 id="mission">Mission</h2>
+      <p class="lead-quote">我々は世の中の人々が安心して生活ができ夢をかなえられるように生活のプロフェッショナルアドバイザーとして信頼頂き、世の中で一番「ありがとう」と言って頂ける存在を目指します。</p>
+      <h2 id="vision">Vision</h2>
+      <p class="lead-quote">お客様が困っているときは最大限力になれるような相談者である人間になります。</p>
+      <p>我々は常にチームである。勝手な独りよがりの判断をせず、皆で話し合い解決策を考えます。常に嘘をつかず、約束事を守る誠実な人間であり続けます。</p>
+      <p>またトライする前にできないとはいいません。</p>
+      <p>常にお客様一人ひとりの声を大切にするとともに、時代の変化に迅速に対応し、絶えず新たな価値の創造に挑戦し、現状に満足することなく成長し続ける会社を目指します。</p>
+
+      <h2 id="p1">方針１　≪お客様の経済的不安解消のための取り組み≫</h2>
+      <p>当社は、お客様が抱える将来の経済的リスクや長生きリスクに起因する経済的不安を取り除くために、以下のような方法でお客様と地域社会に貢献する様々な取り組みを行っています。</p>
+      <h3>「主な取組内容」</h3>
+      <ol>
+        <li>あらゆるお客様（個人・法人）に対して、きめ細かいリスク分析を行い、個々のお客様のニーズに合わせた損害保険及び生命保険の総合提案の実践に努めています。</li>
+        <li>お客様の幅広い相談に対応するために、積極的に業界周辺知識の習得に努め、保険商品以外の金融商品も活用した多角的なコンサルティングの実践に努めています。</li>
+        <li>お客様への対応にあたっては、コンプライアンス遵守はもちろん、専門知識と高い職業倫理をもって質の高いコンサルティングを行います。</li>
+        <li>保険商品のご提案にあたっては、お客様のご意向・ニーズを的確にとらえ、お客様の同意を得ながらご提案を進めております。<br>また、お客様に保険商品の仕組みについて十分なご理解とご納得をいただくために、「比較推奨保険商品一覧」、「商品パンフレット」、「保険設計書」、「契約概要」、「注意喚起情報」等を用いた丁寧な情報提供を行っています。</li>
+        <li>市場リスク（為替リスク、運用リスク等）を有する商品（外貨建保険や変額保険等）については、お客様の属性（金融知識、資産状況、契約を締結する目的等）に照らし、適切な提案、説明を行っています。</li>
+      </ol>
+
+      <h2 id="p2">方針２　≪アフターフォローの取り組み≫</h2>
+      <p>当社は、ご契約後も以下に掲げるアフターフォローの取り組みを継続的に実施しています。</p>
+      <h3>「主な取組内容」</h3>
+      <ol>
+        <li>ご契約者様に、面談時やメールまたは郵送等でアフターフォローのご案内を発信・発送しています。ご契約内容の確認、最新の情報提供、保全手続きのサポート、確実な給付金・保険金のお支払いのサポート等を行います。</li>
+        <li>お客様のアフターフォローに際し、特にご高齢のお客様と特定保険（外貨建保険・変額保険等）のご契約者に対しては、あらためてご契約時の内容に齟齬がないかご説明し、現況報告を丁寧に行います。</li>
+        <li>お客様情報は、保険会社提供のシステムにていつでも確認・フォローできる体制を構築しています。</li>
+      </ol>
+
+      <h2 id="p3">方針３　≪利益相反の適切な管理≫</h2>
+      <p>当社は保険代理店であり、ご案内する保険商品の組成や複数の金融商品・サービスをパッケージにして販売することはありませんが、各保険会社から保険商品の締結の媒介、あるいは代理によりご案内する商品の販売委託元である保険会社から代理店手数料を受領します。</p>
+      <p>そのため、お客様の利益等が不当に害されることがないよう、保険会社毎の代理店手数料の多寡に影響されることなく、お客様の意向に沿った商品について推奨理由を明確に説明したうえで、提案・推奨します。</p>
+      <h3>「主な取組内容」</h3>
+      <ol>
+        <li>年1回の販売商品傾向の検証と各保険会社の代理店手数料の分析</li>
+        <li>是正事案発生時の対応と改善のためのコンプライアンス会議の開催</li>
+      </ol>
+
+      <h2 id="p4">方針４　≪お客様の声を経営に反映させる取り組み≫</h2>
+      <p>当社では苦情・ご要望・ご相談等に、誠実かつ迅速にお応えするとともに、お客様の声を経営に反映させ、常に業務運営の改善や、お客様にとってより良いサービスの提供につなげていくよう、以下の取り組みを行っています。</p>
+      <h3>「主な取組内容」</h3>
+      <ol>
+        <li>当社は、お客様からの苦情に関して、「誤解を含む不満足の表明」と広義に定義し幅広く収集しています。また、お客様よりいただいた苦情について、しっかりと調査・分析を行い、その起因となった案内が、各種法令及び各保険会社のルールや当社の社内規則等と照らし、苦情のレベルを確認するとともに、分析結果についてはコンプライアンス会議にて、内容に応じた改善施策を決定します。</li>
+        <li>当社は、苦情以外の「ご要望」・「ご意見」・「ご相談」・「お褒めの言葉」等のお客様の声を収集し、積極的に社内共有を行うことにより、当社社員のサービスの改善・向上を図っています。</li>
+      </ol>
+
+      <h2 id="p5">方針５　≪お客様本位の業務運営の浸透に向けた取り組み≫</h2>
+      <p>当社は、すべての社員が、業務運営においてお客様本位の行動をしていくための教育体制を確立しています。</p>
+      <p>また、社員の成長が会社の成長であると考え、社員が働きやすい環境を整えています。一人ひとりの声を大切にすることで、社員が最大限の力を発揮できる環境作りに努めています。</p>
+      <h3>「主な取組内容」</h3>
+      <p>教育体制の確立</p>
+      <ol>
+        <li>当社では、Ｅラーニングシステムを活用した教育・学習コンテンツを整備し、常に社員が学習できる体制を構築しています。コンプライアンス教育のために実施しているコンプライアンステストをはじめ、必須受講項目は常に満点合格を課し、社員のコンプライアンス知識、取扱商品やサービスの理解を深める教育を実施しています。</li>
+        <li>当社では、お客様本位の業務運営を実現するため、社員に対し、月次のＥラーニングによる自主点検を行い、社員に対する適切な動機づけの枠組み、およびガバナンス体制の構築を図っており、社員への浸透度合いについても定期的に検証・評価しています。</li>
+        <li>当社では、「お客様本位の業務運営に関する方針」については、会議や研修等において、定期的に、役員より社員に対して、様々な角度から当社の方針についてのメッセージを直接発信することで、一層の理解・浸透を図っています。</li>
+      </ol>
+      <p class="related">関連：<a href="bcp.html">BCP対策（事業継続への取り組み）</a>　／　<a href="privacy.html">個人情報保護方針</a></p>
+    </article>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="index.html">And ONE株式会社 トップページ</a>
+    <span>© 2026 And ONE Inc. All Rights Reserved.</span>
+  </div>
+</footer>
+</body>
+</html>
