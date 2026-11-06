@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>金融商品販売方針（勧誘方針）｜And ONE株式会社</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Jost:wght@400;500&display=swap">
+<style>
+/* トップページ（index.html）と同じ色・書体。本文は読みやすさ優先で1カラム */
+:root{
+  --bg:#F7F8F7; --surface:#FFFFFF; --ink:#141B1D; --muted:#56666A; --line:#DCE3E3;
+  --indigo:#123B42; --indigo-ink:#F1F7F7; --sky:#E2F1F1; --sun:#D3222B; --sun-ink:#FFFFFF;
+  --f-display:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  --f-body:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  --f-label:"Jost","Helvetica Neue",Arial,sans-serif;
+  --gutter-l:max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r:max(16px, env(safe-area-inset-right, 0px));
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D1517; --surface:#142023; --ink:#E5EDED; --muted:#98AAAD; --line:#27373A;
+  --indigo:#163238; --indigo-ink:#E5EDED; --sky:#18292C; --sun:#F0545B; --sun-ink:#1A0A0B; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D1517; --surface:#142023; --ink:#E5EDED; --muted:#98AAAD; --line:#27373A;
+  --indigo:#163238; --indigo-ink:#E5EDED; --sky:#18292C; --sun:#F0545B; --sun-ink:#1A0A0B; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.95;letter-spacing:.02em}
+a{color:inherit}
+a:focus-visible{outline:2px solid var(--sun);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
+.ph{background:color-mix(in srgb,var(--sun) 16%,transparent);border-bottom:1px dashed var(--sun);padding:0 .2em}
+
+.site-header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.site-header .wrap{display:flex;align-items:center;gap:16px;min-height:72px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--f-display);font-weight:700;font-size:1.2rem;letter-spacing:.06em;white-space:nowrap}
+.logo img{width:44px;height:44px;border-radius:50%;display:block}
+.logo small{display:block;font-family:var(--f-label);font-size:.62rem;letter-spacing:.24em;color:var(--muted);font-weight:500;line-height:1}
+.back{margin-left:auto;font-size:.88rem;font-weight:500;text-decoration:none;white-space:nowrap}
+.back:hover{color:var(--sun)}
+@media (max-width:480px){.logo small{display:none}.logo{font-size:1.05rem}}
+
+.page-head{background:var(--indigo);color:var(--indigo-ink);padding-block:clamp(48px,8vw,88px)}
+.eyebrow{font-family:var(--f-label);letter-spacing:.3em;font-size:.75rem;text-transform:uppercase;color:var(--sun);margin:0 0 .8em}
+.page-head h1{font-family:var(--f-display);font-size:clamp(1.6rem,4vw,2.4rem);line-height:1.5;margin:0;text-wrap:balance}
+
+.doc{max-width:760px;margin:0 auto;padding:clamp(40px,7vw,72px) 0 clamp(64px,9vw,112px)}
+.doc p{margin:0 0 1em}
+.doc h2{font-family:var(--f-display);font-size:clamp(1.15rem,2.6vw,1.4rem);line-height:1.6;margin:2.6em 0 .8em;padding-top:1.2em;border-top:1px solid var(--line);scroll-margin-top:88px}
+.doc h3{font-size:1rem;font-weight:700;margin:1.6em 0 .4em}
+.doc ul,.doc ol{margin:0 0 1em;padding-left:1.6em}
+.doc li{margin:.3em 0}
+.toc{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:20px 24px;margin:2em 0 0}
+.toc p{font-family:var(--f-label);letter-spacing:.2em;font-size:.75rem;text-transform:uppercase;color:var(--muted);margin:0 0 .6em}
+.toc ol{margin:0;padding-left:1.4em;display:grid;gap:2px;font-size:.92rem}
+.toc a{text-decoration:none}
+.toc a:hover{color:var(--sun);text-decoration:underline}
+.contact-box{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:20px 24px;margin:0 0 1.4em}
+.contact-box dl{display:grid;grid-template-columns:auto 1fr;gap:4px 20px;margin:0}
+.contact-box dt{color:var(--muted);white-space:nowrap}
+.contact-box dd{margin:0;min-width:0;overflow-wrap:anywhere}
+@media (max-width:480px){.contact-box dl{grid-template-columns:1fr}.contact-box dd{margin-bottom:.6em}}
+.sign{text-align:right;margin-top:2.4em!important;color:var(--muted)}
+
+footer{background:var(--surface);border-top:1px solid var(--line);font-size:.86rem;color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;padding-block:24px}
+footer a{text-decoration:none}
+footer a:hover{color:var(--sun)}
+.lead-quote{font-family:var(--f-display);font-size:clamp(1.05rem,2.2vw,1.25rem);line-height:1.9;border-left:3px solid var(--sun);padding:.2em 0 .2em 1em;margin:0 0 1.4em}
+.tbl{width:100%;border-collapse:collapse;margin:0 0 1.4em;background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.tbl th,.tbl td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line)}
+.tbl th{font-size:.82rem;color:var(--muted);font-weight:500;background:var(--sky)}
+.tbl td:last-child{font-family:var(--f-label);font-size:1.1rem;letter-spacing:.04em;white-space:nowrap}
+.tbl tr:last-child td{border-bottom:0}
+.related{margin-top:3em;padding-top:1.4em;border-top:1px solid var(--line);font-size:.92rem}
+.related a{color:var(--sun)}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="index.html"><img src="assets/logo.jpg" alt="" width="44" height="44"><span>And ONE株式会社<small>AND ONE INCORPORATED</small></span></a>
+    <a class="back" href="index.html">← トップへ戻る</a>
+  </div>
+</header>
+
+<main>
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">Solicitation Policy</p>
+      <h1>金融商品販売方針（勧誘方針）</h1>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <article class="doc">
+      <h2 id="p1">お客様への販売・勧誘にあたって</h2>
+      <p class="lead-quote">お客様の視点に立って、ご満足いただけるように努めます。</p>
+
+      <h2 id="p2">保険その他の金融商品の販売にあたって</h2>
+      <ul>
+        <li>お客様の商品に関する知識、購入経験、購入目的、財産状況など、商品の特性に応じた必要な事項を総合的に勘案し、お客様のご意向と実情に沿った商品の説明および提供に努めます。</li>
+        <li>特に市場リスクを伴う投資性商品については、そのリスクの内容について適切な説明に努めます。</li>
+        <li>お客様にご迷惑をおかけする時間帯や場所、方法での勧誘はいたしません。</li>
+        <li>お客様に商品についての重要事項を正しくご理解いただけるように努めます。また、販売形態に応じて適切な説明に努めます。</li>
+      </ul>
+
+      <h2 id="p3">各種の対応にあたって</h2>
+      <ul>
+        <li>お客様からのお問い合わせには、迅速・適切・丁寧な対応に努めます。</li>
+        <li>保険金等のご請求手続きにあたりましては、迅速・適切・丁寧な対応に努めます。</li>
+        <li>お客様のご意見・ご要望を販売活動に生かしてまいります。</li>
+      </ul>
+
+      <h2 id="p4">各種法令を遵守し、保険その他の金融商品の適正な販売に努めます。</h2>
+      <ul>
+        <li>保険業法、金融サービスの提供及び利用環境の整備等に関する法律、消費者契約法、金融商品取引法、個人情報の保護に関する法律、その他の関係法令等を遵守します。</li>
+        <li>適正な販売を行うために、事務管理体制の整備や販売にあたる者の研修に取り組みます。</li>
+        <li>お客様のプライバシーを尊重するとともに、お客様に関する情報については、適正な取扱いおよび厳正な管理をいたします。</li>
+        <li>未成年の方、特に満15歳未満の方を被保険者とする保険契約等については、保険金の不正取得を防止する観点から適切な募集に努めます。</li>
+        <li>反社会的勢力とは一切の関係を遮断し、また不当要求については断固として拒絶します。</li>
+      </ul>
+
+      <p style="margin-top:2em">以上の方針は「金融サービスの提供及び利用環境の整備等に関する法律」（平成12年法律第101号）に基づく弊社の「勧誘方針」です。</p>
+
+      <h3>代理店名・各種ご相談、お問合わせ窓口</h3>
+      <div class="contact-box">
+        <dl>
+          <dt>代理店名</dt><dd>And ONE 株式会社</dd>
+          <dt>所在地</dt><dd>〒490-1143 愛知県海部郡大治町砂子中割2304</dd>
+          <dt>TEL</dt><dd>052-431-7818</dd>
+          <dt>FAX</dt><dd>052-431-7827</dd>
+        </dl>
+      </div>
+      <p class="related">関連：<a href="policy.html">お客様本位の業務運営に関する方針</a>　／　<a href="privacy.html">個人情報保護方針</a>　／　<a href="bcp.html">BCP対策</a></p>
+    </article>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="index.html">And ONE株式会社 トップページ</a>
+    <span>© 2026 And ONE Inc. All Rights Reserved.</span>
+  </div>
+</footer>
+</body>
+</html>
