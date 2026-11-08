@@ -84,6 +84,15 @@ footer a:hover{color:var(--sun)}
 .point h3{margin:.3em 0 .5em!important;font-size:1.02rem;line-height:1.6}
 .point p{font-size:.92rem;margin:0}
 @media (max-width:640px){.points{grid-template-columns:1fr}}
+.cases{list-style:none;margin:0 0 1.4em;padding:0;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--surface)}
+.cases li{display:grid;grid-template-columns:4.5em 1fr auto;gap:4px 16px;align-items:baseline;padding:14px 20px;border-top:1px solid var(--line)}
+.cases li:first-child{border-top:0}
+.cases .cy{font-family:var(--f-label);color:var(--muted);font-size:.9rem}
+.cases .cn{font-weight:500}
+.cases .cn small{color:var(--muted);font-size:.78rem;margin-left:.3em;white-space:nowrap}
+.cases .ca{font-family:var(--f-display);font-weight:600;font-size:1.1rem;white-space:nowrap;text-align:right}
+.cases .ca small{font-family:var(--f-body);font-weight:400;font-size:.72rem;color:var(--muted);margin-right:.6em}
+@media (max-width:560px){.cases li{grid-template-columns:1fr auto;padding:12px 16px}.cases .cy{grid-column:1/-1}.cases .ca small{display:block;margin:0}}
 .notes{font-size:.82rem;color:var(--muted)}
 .notes p{margin:0 0 .6em}
 .cta{display:inline-flex;align-items:center;gap:.5em;background:var(--sun);color:var(--sun-ink);border-radius:999px;padding:.8em 1.6em;font-weight:700;text-decoration:none;margin:.4em 0 1.4em}
@@ -173,8 +182,25 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-vis
         <p>※ Chubb（チャブ）保険の正式名称はChubb損害保険株式会社です。詳しくは<a href="https://www.chubb.com/jp-jp/" target="_blank" rel="noopener">Chubb損害保険株式会社のホームページ</a>をご覧ください。</p>
       </div>
 
-      <h2 id="price">保険料の例</h2>
-      <p><span class="ph">最新の保険料例を準備中です。</span>お車ごとにお見積りしますので、下のフォームからお気軽にお問い合わせください。</p>
+      <h2 id="price">車両保険金額の引き受け事例</h2>
+      <h3>国産車</h3>
+      <ul class="cases">
+          <li><span class="cy">1988年</span><span class="cn">ホンダ　NSX<small>（E-NA1）</small></span><span class="ca"><small>車両保険金額</small>800万円</span></li>
+          <li><span class="cy">1992年</span><span class="cn">日産　スカイラインGT-R<small>（E-BNR32）</small></span><span class="ca"><small>車両保険金額</small>600万円</span></li>
+          <li><span class="cy">1972年</span><span class="cn">日産　スカイライン　2000GT<small>（KGC10）</small></span><span class="ca"><small>車両保険金額</small>800万円</span></li>
+          <li><span class="cy">1994年</span><span class="cn">マツダ　ユーノスロードスター<small>（E-NA8C）</small></span><span class="ca"><small>車両保険金額</small>250万円</span></li>
+          <li><span class="cy">1985年</span><span class="cn">トヨタ　カローラレビン<small>（AE86）</small></span><span class="ca"><small>車両保険金額</small>300万円</span></li>
+      </ul>
+      <h3>輸入車</h3>
+      <ul class="cases">
+          <li><span class="cy">1993年</span><span class="cn">ポルシェ　911　カレラ2<small>（E-964A）</small></span><span class="ca"><small>車両保険金額</small>1,000万円</span></li>
+          <li><span class="cy">1956年</span><span class="cn">フォルクスワーゲン　タイプ1<small>（型式不明）</small></span><span class="ca"><small>車両保険金額</small>250万円</span></li>
+          <li><span class="cy">1990年</span><span class="cn">ランチア　デルタ　HFインテグラーレ　エボルツィオーネⅡ<small>（E-L31E5）</small></span><span class="ca"><small>車両保険金額</small>800万円</span></li>
+          <li><span class="cy">1990年</span><span class="cn">ローバー　ミニ<small>（XN12A）</small></span><span class="ca"><small>車両保険金額</small>200万円</span></li>
+          <li><span class="cy">1973年</span><span class="cn">アルピーヌ　A110<small>（型式不明）</small></span><span class="ca"><small>車両保険金額</small>1,000万円</span></li>
+      </ul>
+      <div class="notes"><p>※市場価格でのお引受けのため、実際の引受時の状況や車両の状態によって変動する可能性がございます。予めご了承ください。</p></div>
+      <p>お車ごとにお見積りしますので、下のフォームからお気軽にお問い合わせください。</p>
 
       <h2 id="form">お見積り・お問い合わせフォーム</h2>
       <p>わかる範囲でご記入ください。担当者より折り返しご連絡いたします。受付時間　平日 9:00〜17:00</p>
