@@ -125,10 +125,18 @@ a.pitem:hover h3{color:var(--sun)}
 @media (max-width:820px){.reasons{grid-template-columns:1fr}.reason,.reason + .reason{padding:28px 0;border-left:0;border-bottom:1px solid var(--line)}}
 
 /* products */
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
-.tab{font-family:var(--f-body);font-size:.92rem;font-weight:500;padding:.6em 1.3em;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;cursor:pointer}
-.tab[aria-selected="true"]{background:var(--indigo);color:var(--indigo-ink);border-color:var(--indigo)}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:30px}
+.tab{position:relative;font-family:var(--f-body);text-align:left;padding:16px 18px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:14px;cursor:pointer;transition:border-color .2s,background .2s}
+.tab:hover{border-color:var(--indigo)}
+.tab .t-name{display:block;font-family:var(--f-display);font-size:1.12rem;font-weight:600}
+.tab .t-sub{display:block;font-size:.78rem;color:var(--muted);margin-top:4px;line-height:1.5}
+.tab[aria-selected="true"]{background:var(--indigo);color:var(--indigo-ink);border-color:var(--indigo);box-shadow:inset 0 -3px 0 var(--sun)}
+.tab[aria-selected="true"] .t-sub{color:inherit;opacity:.8}
+.tab[aria-selected="true"]::after{content:"";position:absolute;left:50%;bottom:-8px;width:14px;height:14px;background:var(--indigo);transform:translateX(-50%) rotate(45deg);border-radius:2px}
+.tab:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
+@media (max-width:640px){.tabs{gap:6px}.tab{padding:12px 10px;text-align:center}.tab .t-name{font-size:.98rem}.tab .t-sub{display:none}}
 .plist{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.plist[hidden]{display:none}
 .pitem{background:var(--surface);padding:22px 22px 24px;min-width:0}
 .pitem h3{font-size:1.05rem;font-weight:700}
 .pitem p{color:var(--muted);font-size:.88rem;margin-top:.3em}
@@ -367,28 +375,28 @@ footer{background:var(--surface);border-top:1px solid var(--line);font-size:.86r
       <div class="head">
         <p class="eyebrow">Products</p>
         <h2 class="h2">取扱商品</h2>
-        <p class="lead">生命保険4社・損害保険3社の商品を取り扱っています。</p>
+        <p class="lead">損害保険3社・生命保険4社の商品を取り扱っています。知りたい分野を選んでください。</p>
       </div>
       <div class="tabs" role="tablist" aria-label="商品カテゴリ">
-        <button class="tab" role="tab" aria-selected="true" aria-controls="p-life" id="t-life">生命保険</button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="p-nonlife" id="t-nonlife">損害保険</button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="p-corp" id="t-corp">法人向け</button>
+        <button class="tab" role="tab" aria-selected="true" aria-controls="p-nonlife" id="t-nonlife"><span class="t-name">損害保険</span><span class="t-sub">自動車・火災・地震など</span></button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="p-life" id="t-life"><span class="t-name">生命保険</span><span class="t-sub">医療・がん・終身など</span></button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="p-corp" id="t-corp"><span class="t-name">法人向け</span><span class="t-sub">事業保障・賠償責任など</span></button>
       </div>
-      <div class="plist" id="p-life" role="tabpanel" aria-labelledby="t-life">
-        <div class="pitem"><h3>医療保険</h3><p>入院や手術に備えたい方へ</p></div>
-        <div class="pitem"><h3>がん保険</h3><p>がんの治療費と収入減に備えたい方へ</p></div>
-        <div class="pitem"><h3>終身保険</h3><p>一生涯の死亡保障を準備したい方へ</p></div>
-        <div class="pitem"><h3>定期保険</h3><p>子育て期など、一定期間の保障を手厚くしたい方へ</p></div>
-        <div class="pitem"><h3>個人年金保険</h3><p>老後の生活資金をコツコツ準備したい方へ</p></div>
-        <div class="pitem"><h3>学資・こども保険</h3><p>お子さまの教育資金を計画的に準備したい方へ</p></div>
-      </div>
-      <div class="plist" id="p-nonlife" role="tabpanel" aria-labelledby="t-nonlife" hidden>
+      <div class="plist" id="p-nonlife" role="tabpanel" aria-labelledby="t-nonlife">
         <div class="pitem"><h3>自動車保険</h3><p>事故の賠償やご自身のケガに備えたい方へ</p></div>
         <div class="pitem"><h3>火災保険</h3><p>住まいと家財を火災・自然災害から守りたい方へ</p></div>
         <div class="pitem"><h3>地震保険</h3><p>地震・噴火・津波による損害に備えたい方へ</p></div>
         <div class="pitem"><h3>傷害保険</h3><p>日常生活のケガに備えたい方へ</p></div>
         <div class="pitem"><h3>個人賠償責任保険</h3><p>他人にケガをさせた場合などに備えたい方へ</p></div>
         <a class="pitem" data-travel-link href="#travel" target="_blank" rel="noopener"><h3>海外旅行保険 <span class="ext" aria-hidden="true">↗</span></h3><p>ネットで申し込めます。旅行中の病気やケガ、携行品の損害に備えたい方へ</p></a>
+      </div>
+      <div class="plist" id="p-life" role="tabpanel" aria-labelledby="t-life" hidden>
+        <div class="pitem"><h3>医療保険</h3><p>入院や手術に備えたい方へ</p></div>
+        <div class="pitem"><h3>がん保険</h3><p>がんの治療費と収入減に備えたい方へ</p></div>
+        <div class="pitem"><h3>終身保険</h3><p>一生涯の死亡保障を準備したい方へ</p></div>
+        <div class="pitem"><h3>定期保険</h3><p>子育て期など、一定期間の保障を手厚くしたい方へ</p></div>
+        <div class="pitem"><h3>個人年金保険</h3><p>老後の生活資金をコツコツ準備したい方へ</p></div>
+        <div class="pitem"><h3>学資・こども保険</h3><p>お子さまの教育資金を計画的に準備したい方へ</p></div>
       </div>
       <div class="plist" id="p-corp" role="tabpanel" aria-labelledby="t-corp" hidden>
         <div class="pitem"><h3>事業保障</h3><p>経営者に万一があった場合の資金を確保したい企業へ</p></div>
