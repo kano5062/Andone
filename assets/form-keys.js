@@ -2,5 +2,5 @@
 // メールアドレスはここに書かない：キーごとに登録したアドレスへ届くので、ページを見てもアドレスは分からない
 var CONTACT_FORM_KEYS={
   honsha:'df16c00b-de87-4dff-8ba4-502b1862da27',   // 本社（aichi@ で発行したキー）
-  fukuoka:''   // 福岡支社（fukuoka@ で発行したキー）
+  fukuoka:'9cbaf822-c925-44a7-95ea-86b593f9a7e9'   // 福岡支社（fukuoka@ で発行したキー）
 };
